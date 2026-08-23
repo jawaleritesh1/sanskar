@@ -1,5 +1,21 @@
 import React, { useState } from 'react';
-import { ArrowRight, Search, BookOpen, Clock, User, X, Share2, CheckCircle2, Bookmark, Newspaper } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  ArrowRight,
+  Search,
+  BookOpen,
+  Clock,
+  User,
+  X,
+  Share2, 
+  CheckCircle2,
+  Bookmark,
+  Newspaper,
+  Sparkles,
+  ArrowUpRight,
+  Calendar,
+  Rocket
+} from 'lucide-react';
 import { insightsData } from '../data/insightsData';
 import { InsightArticle } from '../types';
 
@@ -8,6 +24,15 @@ interface InsightsViewProps {
   onNavigate: (path: string) => void;
   onOpenProjectModal: (service?: string) => void;
 }
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export const InsightsView: React.FC<InsightsViewProps> = ({
   initialArticleSlug,
@@ -39,52 +64,89 @@ export const InsightsView: React.FC<InsightsViewProps> = ({
   };
 
   return (
-    <div className="w-full bg-[#0B0F19] text-[#F1F5F9] pt-28 pb-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="w-full bg-transparent text-[#092B78] pt-28 sm:pt-32 pb-24 font-sans selection:bg-[#FF4B16] selection:text-white overflow-x-hidden">
+      
+      {/* Subtle Ambient Radial Lighting */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.6)_0%,rgba(247,249,255,0.25)_45%,rgba(234,240,255,0.5)_100%)]" />
+        <motion.div
+          animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.45, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#C8D8FF] blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.16, 0.08] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute right-0 top-96 h-[500px] w-[500px] rounded-full bg-[#FF4B16] blur-[140px]"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="max-w-4xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold uppercase tracking-wider mb-4">
-            <Newspaper className="w-3.5 h-3.5 text-[#F97316]" />
-            SGS EXECUTIVE INSIGHTS
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          className="max-w-4xl mb-12"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-[2px] w-8 bg-[#FF4B16]" />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#092B78]">
+              SGS Executive Insights
+            </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white font-sans leading-tight">
-            Ideas for businesses building what's next.
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-[#092B78] leading-[1.08]">
+            Strategic Perspectives For <br />
+            Building{" "}
+            <span className="relative inline-block text-[#FF4B16]">
+              What's Next
+              <motion.span
+                animate={{ scaleX: [0, 1, 1] }}
+                transition={{ duration: 1.1, delay: 0.5 }}
+                className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-[#FF4B16]/30"
+              />
+            </span>
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-400 font-sans leading-relaxed">
+
+          <p className="mt-6 text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
             In-depth strategic articles on high-converting web architecture, performance demand generation, CRM implementation, and practical AI automation.
           </p>
-        </div>
+        </motion.div>
 
         {/* Search & Category Filter Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12 pb-6 border-b border-slate-800">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12 pb-6 border-b border-slate-200/80">
           
           {/* Categories */}
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                  selectedCategory === cat
-                    ? 'bg-[#F97316] text-white shadow-sm'
-                    : 'bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            {categories.map((cat) => {
+              const isSelected = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
+                    isSelected
+                      ? 'bg-[#092B78] text-white shadow-lg shadow-[#092B78]/25 scale-105'
+                      : 'bg-white/80 border border-slate-200/80 text-[#092B78] hover:bg-white hover:border-[#092B78]/30'
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
 
           {/* Search Input */}
-          <div className="relative w-full md:w-72">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <div className="relative w-full md:w-80">
+            <Search size={16} className="text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search articles..."
-              className="w-full pl-10 pr-4 py-2 text-xs bg-slate-900 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
+              placeholder="Search articles & topics..."
+              className="w-full pl-11 pr-4 py-2.5 text-xs bg-white/90 border border-slate-200/80 rounded-full text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] focus:ring-2 focus:ring-[#FF4B16]/20 transition-all shadow-sm"
             />
           </div>
 
@@ -97,36 +159,39 @@ export const InsightsView: React.FC<InsightsViewProps> = ({
               key={art.slug}
               id={`insight-card-${art.slug}`}
               onClick={() => setSelectedArticle(art)}
-              className="cursor-pointer rounded-2xl bg-slate-900/50 border border-slate-800/90 p-6 sm:p-7 hover:bg-slate-900/80 hover:border-slate-700 transition-all duration-200 flex flex-col justify-between group shadow-lg"
+              className="relative overflow-hidden cursor-pointer rounded-3xl bg-white border border-slate-200/80 p-7 sm:p-8 hover:border-[#092B78]/40 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group shadow-[0_15px_40px_rgba(9,43,120,0.04)] hover:-translate-y-1.5"
             >
+              {/* Top Hover Gradient Line */}
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#092B78] via-[#FF4B16] to-[#FFA07A] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-slate-800 text-orange-400 border border-slate-700">
+                  <span className="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#EEF3FF] text-[#092B78] border border-[#092B78]/10">
                     {art.category}
                   </span>
-                  <span className="text-xs text-slate-400 font-mono flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
+                  <span className="text-xs text-slate-500 font-semibold flex items-center gap-1.5">
+                    <Clock size={13} className="text-slate-400" />
                     {art.readTime}
                   </span>
                 </div>
 
-                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors mb-3 leading-snug">
+                <h3 className="text-xl font-bold text-[#092B78] group-hover:text-[#FF4B16] transition-colors mb-3 leading-snug">
                   {art.title}
                 </h3>
 
-                <p className="text-xs text-slate-400 leading-relaxed line-clamp-3 mb-6">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3 mb-6">
                   {art.excerpt}
                 </p>
               </div>
 
               <div>
-                <div className="flex items-center justify-between pt-4 border-t border-slate-800 text-xs text-slate-400">
-                  <span className="font-medium text-slate-300">{art.author.name}</span>
-                  <span className="text-slate-400">{art.publishedDate}</span>
+                <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                  <span className="font-semibold text-[#092B78]">{art.author.name}</span>
+                  <span>{art.publishedDate}</span>
                 </div>
-                <div className="mt-3 flex items-center justify-between text-xs font-semibold text-orange-400 group-hover:text-orange-300">
+                <div className="mt-3 flex items-center justify-between text-xs font-bold text-[#FF4B16]">
                   <span>Read Full Article</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
             </div>
@@ -134,20 +199,26 @@ export const InsightsView: React.FC<InsightsViewProps> = ({
         </div>
 
         {/* Bottom Editorial Callout */}
-        <div className="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="max-w-xl">
-            <h3 className="text-xl font-bold text-white">
+        <div className="relative overflow-hidden rounded-3xl bg-[#051336] p-8 sm:p-12 border border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl text-white">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF4B16]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="max-w-xl relative z-10">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#FF4B16] border border-white/10 mb-2.5 backdrop-blur-sm">
+              <Rocket size={13} />
+              <span>Tailored Intelligence</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-bold text-white">
               Looking for tailored growth insights for your enterprise?
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
               Our growth strategists conduct custom audits on ad pipelines, conversion leaks, and tech debt.
             </p>
           </div>
           <button
             onClick={() => onOpenProjectModal()}
-            className="px-6 py-3 rounded-xl bg-[#F97316] text-white text-xs sm:text-sm font-semibold hover:bg-orange-600 shadow-md shadow-orange-500/20 shrink-0"
+            className="relative z-10 flex items-center gap-2 rounded-full bg-[#FF4B16] px-7 py-3.5 text-xs sm:text-sm font-semibold text-white shadow-xl shadow-[#FF4B16]/25 transition-all duration-300 hover:bg-[#E03E0E] shrink-0 hover:-translate-y-0.5 active:scale-95"
           >
-            Schedule a Strategic Audit →
+            <span>Schedule a Strategic Audit</span>
+            <ArrowRight size={15} />
           </button>
         </div>
 
@@ -155,70 +226,73 @@ export const InsightsView: React.FC<InsightsViewProps> = ({
 
       {/* Article Detail Reader Modal */}
       {selectedArticle && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="relative w-full max-w-3xl bg-[#0F172A] border border-slate-800 rounded-3xl p-6 sm:p-10 text-white shadow-2xl max-h-[92vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#051336]/75 backdrop-blur-md animate-in fade-in duration-150">
+          <div className="relative w-full max-w-3xl bg-white border border-slate-200/80 rounded-3xl p-7 sm:p-10 text-[#092B78] shadow-2xl max-h-[92vh] overflow-y-auto">
             
+            {/* Top Accent Line */}
+            <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#071F5B] via-[#2563EB] to-[#071F5B] rounded-t-3xl" />
+
             {/* Modal Header */}
-            <div className="flex items-start justify-between gap-4 pb-6 border-b border-slate-800 mb-6">
+            <div className="flex items-start justify-between gap-4 pb-6 border-b border-slate-200/80 mb-6 pt-2">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-orange-400 px-2 py-0.5 rounded bg-slate-800">
+                  <span className="text-xs font-bold uppercase px-3 py-0.5 rounded-full bg-[#EEF3FF] text-[#092B78] border border-[#092B78]/10">
                     {selectedArticle.category}
                   </span>
-                  <span className="text-slate-600">•</span>
-                  <span className="text-xs text-slate-400 flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
+                  <span className="text-slate-300">•</span>
+                  <span className="text-xs text-slate-500 font-semibold flex items-center gap-1">
+                    <Clock size={13} className="text-slate-400" />
                     {selectedArticle.readTime}
                   </span>
-                  <span className="text-slate-600">•</span>
-                  <span className="text-xs text-slate-400">{selectedArticle.publishedDate}</span>
+                  <span className="text-slate-300">•</span>
+                  <span className="text-xs text-slate-500 font-semibold">{selectedArticle.publishedDate}</span>
                 </div>
                 
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                <h1 className="text-2xl sm:text-3xl font-bold text-[#092B78] leading-tight">
                   {selectedArticle.title}
                 </h1>
                 
-                <div className="flex items-center gap-2 mt-3 text-xs text-slate-400">
-                  <User className="w-3.5 h-3.5 text-orange-400" />
-                  <span>By <strong className="text-white">{selectedArticle.author.name}</strong>, {selectedArticle.author.role}</span>
+                <div className="flex items-center gap-2 mt-3 text-xs text-slate-600">
+                  <User size={14} className="text-[#FF4B16]" />
+                  <span>By <strong className="text-[#092B78]">{selectedArticle.author.name}</strong>, {selectedArticle.author.role}</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleShare}
-                  className="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+                  className="p-2.5 rounded-full bg-[#EEF3FF] text-[#092B78] hover:text-[#FF4B16] hover:bg-[#C8D8FF]/50 transition-colors"
                   title="Share article"
                   aria-label="Share article"
                 >
-                  <Share2 className="w-4 h-4" />
+                  <Share2 size={16} />
                 </button>
                 <button
                   onClick={() => setSelectedArticle(null)}
-                  className="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+                  className="p-2.5 rounded-full bg-[#EEF3FF] text-[#092B78] hover:text-[#FF4B16] hover:bg-[#C8D8FF]/50 transition-colors"
                   aria-label="Close article modal"
                 >
-                  <X className="w-5 h-5" />
+                  <X size={18} />
                 </button>
               </div>
             </div>
 
             {copiedLink && (
-              <div className="mb-4 p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-800 text-emerald-400 text-xs text-center">
+              <div className="mb-4 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs text-center font-semibold">
                 Link copied to clipboard!
               </div>
             )}
 
             {/* Key Takeaways Box */}
-            <div className="p-5 rounded-2xl bg-slate-950/90 border border-slate-800 mb-8">
-              <span className="text-xs uppercase font-bold text-orange-400 tracking-wider block mb-2 flex items-center gap-1.5">
-                <Bookmark className="w-3.5 h-3.5" />
+            <div className="p-6 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/15 mb-8">
+              <span className="text-xs uppercase font-bold text-[#092B78] tracking-wider block mb-3 flex items-center gap-2">
+                <Bookmark size={15} className="text-[#FF4B16]" />
                 Executive Summary & Key Takeaways
               </span>
               <ul className="space-y-2">
                 {selectedArticle.keyTakeaways.map((takeaway, idx) => (
-                  <li key={idx} className="text-xs sm:text-sm text-slate-200 flex items-start gap-2.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#F97316] shrink-0 mt-0.5" />
+                  <li key={idx} className="text-xs sm:text-sm text-slate-800 flex items-start gap-2.5 font-medium">
+                    <CheckCircle2 size={15} className="text-[#FF4B16] shrink-0 mt-0.5" />
                     <span>{takeaway}</span>
                   </li>
                 ))}
@@ -226,7 +300,7 @@ export const InsightsView: React.FC<InsightsViewProps> = ({
             </div>
 
             {/* Article Markdown Render */}
-            <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed whitespace-pre-line border-b border-slate-800 pb-8 mb-8">
+            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed whitespace-pre-line border-b border-slate-100 pb-8 mb-8 font-sans">
               {selectedArticle.contentMarkdown}
             </div>
 
@@ -234,7 +308,7 @@ export const InsightsView: React.FC<InsightsViewProps> = ({
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <button
                 onClick={() => setSelectedArticle(null)}
-                className="text-xs font-semibold text-slate-400 hover:text-white"
+                className="text-xs font-bold text-slate-500 hover:text-[#092B78] transition-colors"
               >
                 ← Back to Insights Listing
               </button>
@@ -244,10 +318,10 @@ export const InsightsView: React.FC<InsightsViewProps> = ({
                   setSelectedArticle(null);
                   onOpenProjectModal();
                 }}
-                className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#F97316] hover:bg-orange-600 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-md shadow-orange-500/20"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full bg-[#FF4B16] px-7 py-3 text-xs sm:text-sm font-semibold text-white shadow-xl shadow-[#FF4B16]/25 transition-all duration-300 hover:bg-[#E03E0E] active:scale-95"
               >
                 <span>Discuss This Framework with SGS</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight size={15} />
               </button>
             </div>
 

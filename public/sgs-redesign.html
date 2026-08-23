@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanskar Growth Solutions — Growth Operating System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    --ink:      #1B190F;
+    --ink-soft: #2A2717;
+    --paper:    #F4EEE0;
+    --paper-2:  #EAE2CC;
+    --mustard:  #DEA430;
+    --mustard-d:#B5811F;
+    --olive:    #545C3B;
+    --olive-l:  #7C8259;
+    --sand:     #D9CCA9;
+    --rust:     #9C4426;
+    --line:     rgba(27,25,15,0.14);
+    --line-on-ink: rgba(244,238,224,0.16);
+
+    --f-display: 'Fraunces', serif;
+    --f-body: 'Inter', sans-serif;
+    --f-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family: var(--f-body);
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--mustard); color:var(--ink);}
+
+  .wrap{ max-width:1320px; margin:0 auto; padding:0 40px; }
+  @media(max-width:768px){ .wrap{padding:0 22px;} }
+
+  .eyebrow{
+    font-family:var(--f-mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    display:flex; align-items:center; gap:10px;
+    color: var(--olive);
+  }
+  .eyebrow::before{
+    content:''; width:7px; height:7px; border-radius:50%;
+    background: var(--mustard); display:inline-block; flex:none;
+  }
+  .eyebrow.on-ink{ color: var(--sand); }
+
+  h1,h2,h3,h4{ font-family:var(--f-display); font-weight:500; line-height:1.02; letter-spacing:-.01em; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--f-mono); font-size:13px; letter-spacing:.03em;
+    padding:15px 26px; border-radius:2px; border:1px solid var(--ink);
+    background:var(--ink); color:var(--paper);
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), background .3s, color .3s, border-color .3s;
+    cursor:pointer;
+  }
+  .btn:hover{ transform: translate(-2px,-2px); background:var(--mustard); border-color:var(--mustard); color:var(--ink); }
+  .btn.ghost{ background:transparent; color:var(--ink); border-color:var(--ink); }
+  .btn.ghost:hover{ background:var(--ink); color:var(--paper); }
+  .btn.on-ink{ background:var(--mustard); color:var(--ink); border-color:var(--mustard); }
+  .btn.on-ink:hover{ background:var(--paper); border-color:var(--paper); }
+  .btn.ghost-ink{ background:transparent; color:var(--paper); border-color:var(--line-on-ink); }
+  .btn.ghost-ink:hover{ background:var(--paper); color:var(--ink); border-color:var(--paper); }
+  .btn svg{ width:14px; height:14px; transition: transform .3s; }
+  .btn:hover svg{ transform: translateX(3px); }
+
+  /* reveal on scroll */
+  .rv{ opacity:0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.16,.8,.24,1), transform .9s cubic-bezier(.16,.8,.24,1); }
+  .rv.in{ opacity:1; transform:none; }
+  .rv2{ transition-delay:.12s; }
+  .rv3{ transition-delay:.24s; }
+  .rv4{ transition-delay:.36s; }
+
+  /* ============ NAV ============ */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(244,238,224,.82); backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+    transition: transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  header.hide{ transform: translateY(-100%); }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:20px 40px; max-width:1320px; margin:0 auto; }
+  .logo{ font-family:var(--f-display); font-weight:600; font-size:22px; letter-spacing:-.01em; display:flex; align-items:baseline; gap:6px;}
+  .logo span{ font-family:var(--f-mono); font-size:9px; letter-spacing:.1em; color:var(--olive); font-weight:400; }
+  .navlinks{ display:flex; gap:34px; font-size:14px; }
+  @media(max-width:1000px){ .navlinks{display:none;} }
+  .navlinks a{ position:relative; padding:4px 0; }
+  .navlinks a::after{ content:''; position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--ink); transition:width .3s; }
+  .navlinks a:hover::after{ width:100%; }
+  .navcta{ display:flex; gap:12px; align-items:center; }
+  @media(max-width:640px){ .navcta .btn.ghost{display:none;} nav{padding:16px 22px;} }
+
+  /* ============ HERO ============ */
+  .hero{ position:relative; padding:172px 0 0; overflow:hidden; }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.15fr .85fr; gap:40px; align-items:start;
+    position:relative; z-index:2;
+  }
+  @media(max-width:940px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero h1{
+    font-size: clamp(46px, 6.2vw, 92px);
+    margin-top:22px;
+  }
+  .hero h1 .fade{ color: var(--ink); }
+  .hero h1 .mark{
+    position:relative; display:inline-block; font-style:italic; color:var(--ink);
+  }
+  .hero h1 .mark .bg{
+    position:absolute; inset:6% -3% 2%; background:var(--mustard); z-index:-1;
+    transform: skewX(-4deg);
+  }
+  .hero-sub{ margin-top:34px; max-width:460px; }
+  .hero-sub p{ font-size:17px; line-height:1.6; color: var(--ink-soft); }
+  .hero-ctas{ display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; }
+
+  .hero-side{ padding-top:10px; }
+  .hero-side-inner{
+    border-left:1px solid var(--line); padding-left:32px; margin-left:8px;
+  }
+  @media(max-width:940px){ .hero-side{margin-top:40px;} }
+  .hero-side .num{ font-family:var(--f-mono); font-size:12px; color:var(--olive); }
+  .hero-side p.desc{ margin-top:10px; font-size:14.5px; color:var(--ink-soft); line-height:1.55; }
+
+  .engine-svg{ position:absolute; top:60px; right:-140px; width:640px; opacity:.9; z-index:1; pointer-events:none; }
+  @media(max-width:1200px){ .engine-svg{ right:-260px; opacity:.55;} }
+  @media(max-width:640px){ .engine-svg{ display:none; } }
+
+  .stage-strip{
+    margin-top:96px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(3,1fr);
+  }
+  @media(max-width:800px){ .stage-strip{grid-template-columns:1fr;} }
+  .stage{ padding:36px 32px; border-right:1px solid var(--line); position:relative; }
+  .stage:last-child{ border-right:none; }
+  @media(max-width:800px){ .stage{border-right:none; border-bottom:1px solid var(--line);} .stage:last-child{border-bottom:none;} }
+  .stage .tag{ font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; color:var(--mustard-d); text-transform:uppercase; }
+  .stage h4{ font-size:22px; margin-top:10px; font-weight:500; }
+  .stage p{ margin-top:10px; font-size:14px; color:var(--ink-soft); line-height:1.55; max-width:280px; }
+
+  /* ============ MARQUEE / INDUSTRIES ============ */
+  .marquee-wrap{ padding:54px 0; border-bottom:1px solid var(--line); overflow:hidden; background:var(--paper-2); }
+  .marquee-label{ text-align:center; font-family:var(--f-mono); font-size:11px; letter-spacing:.14em; color:var(--olive); margin-bottom:26px; text-transform:uppercase; }
+  .marquee{ display:flex; width:max-content; animation: scroll 32s linear infinite; }
+  .marquee:hover{ animation-play-state:paused; }
+  .marquee span{
+    font-family:var(--f-display); font-style:italic; font-size:26px; color:var(--ink-soft);
+    padding:0 34px; white-space:nowrap; display:flex; align-items:center; gap:34px;
+  }
+  .marquee span::after{ content:'✦'; font-style:normal; font-size:13px; color:var(--mustard); }
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ============ SECTION HEADERS ============ */
+  .sec{ padding:120px 0; position:relative; }
+  @media(max-width:768px){ .sec{padding:80px 0;} }
+  .sec-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:70px; }
+  @media(max-width:768px){ .sec-head{flex-direction:column; align-items:flex-start; gap:20px; margin-bottom:48px;} }
+  .sec-head h2{ font-size: clamp(34px,4vw,54px); margin-top:16px; max-width:640px; }
+  .sec-head .r{ max-width:320px; font-size:15px; color:var(--ink-soft); line-height:1.6; text-align:right; }
+  @media(max-width:768px){ .sec-head .r{text-align:left;} }
+
+  /* ============ CAPABILITIES ============ */
+  .cap-list{ border-top:1px solid var(--line); }
+  .cap-row{
+    display:grid; grid-template-columns: 220px 1fr 1fr; gap:40px;
+    padding:44px 0; border-bottom:1px solid var(--line);
+    position:relative; transition: background .4s;
+  }
+  @media(max-width:900px){ .cap-row{grid-template-columns:1fr; gap:14px; padding:32px 0;} }
+  .cap-row:hover{ background: rgba(222,164,48,.08); }
+  .cap-row .stage-tag{ font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; color:var(--olive); text-transform:uppercase; padding-top:8px; }
+  .cap-row h3{ font-size:30px; font-weight:500; }
+  .cap-row .body p{ font-size:15px; color:var(--ink-soft); line-height:1.6; margin-bottom:16px; max-width:440px; }
+  .cap-row .deliv{ list-style:none; }
+  .cap-row .deliv li{ font-size:13.5px; color:var(--ink-soft); padding-left:18px; position:relative; margin-bottom:7px; }
+  .cap-row .deliv li::before{ content:''; position:absolute; left:0; top:7px; width:8px; height:1px; background:var(--mustard-d); }
+
+  /* ============ WORK ============ */
+  .work-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:2px; background:var(--line); border:1px solid var(--line); }
+  @media(max-width:800px){ .work-grid{grid-template-columns:1fr;} }
+  .work-card{ background:var(--paper); padding:44px 40px; position:relative; overflow:hidden; }
+  .work-card:nth-child(4){ background: var(--ink); color:var(--paper); }
+  .work-card:nth-child(4) .work-cat, .work-card:nth-child(4) .work-loc{ color: var(--sand); }
+  .work-card:nth-child(4) .work-desc{ color: rgba(244,238,224,.72); }
+  .work-card:nth-child(4) .outcome{ background: rgba(244,238,224,.06); border-color: var(--line-on-ink); }
+  .work-card:nth-child(4) .outcome .lbl{ color: var(--mustard); }
+  .work-card:nth-child(4) .readmore{ color:var(--mustard); }
+  .work-top{ display:flex; justify-content:space-between; gap:20px; font-family:var(--f-mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; }
+  .work-cat{ color:var(--mustard-d); }
+  .work-loc{ color:var(--olive); text-align:right; }
+  .work-card h3{ font-size:28px; margin-top:22px; font-weight:500; }
+  .work-desc{ font-size:14.5px; color:var(--ink-soft); line-height:1.6; margin-top:14px; max-width:420px; }
+  .outcome{ margin-top:26px; padding:16px 18px; border:1px solid var(--line); background: rgba(84,92,59,.06); }
+  .outcome .lbl{ font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; color:var(--olive); text-transform:uppercase; }
+  .outcome p{ font-size:13.5px; margin-top:8px; line-height:1.5; }
+  .readmore{ display:inline-flex; align-items:center; gap:8px; margin-top:24px; font-family:var(--f-mono); font-size:12.5px; color:var(--ink); border-bottom:1px solid currentColor; padding-bottom:2px; }
+  .readmore svg{ width:12px; height:12px; transition:transform .3s; }
+  .work-card:hover .readmore svg{ transform:translateX(4px); }
+
+  /* ============ CTA ============ */
+  .cta-sec{ background:var(--ink); color:var(--paper); padding:150px 0; position:relative; overflow:hidden; }
+  .cta-inner{ position:relative; z-index:2; text-align:center; max-width:720px; margin:0 auto; }
+  .cta-inner h2{ font-size:clamp(34px,5vw,58px); color:var(--paper); margin-top:20px; }
+  .cta-inner h2 i{ font-style:italic; color:var(--mustard); }
+  .cta-inner p{ margin-top:22px; font-size:16px; color:rgba(244,238,224,.68); line-height:1.6; }
+  .cta-ctas{ display:flex; gap:14px; justify-content:center; margin-top:38px; flex-wrap:wrap; }
+  .cta-contact{ margin-top:50px; font-family:var(--f-mono); font-size:13px; color:rgba(244,238,224,.5); letter-spacing:.04em; }
+  .cta-line{ position:absolute; opacity:.5; }
+
+  /* ============ FOOTER ============ */
+  footer{ background:var(--ink); color:var(--paper); padding-top:70px; border-top:1px solid var(--line-on-ink); }
+  .foot-grid{ display:grid; grid-template-columns: 1.3fr .8fr .8fr 1fr; gap:40px; padding-bottom:70px; }
+  @media(max-width:900px){ .foot-grid{grid-template-columns:1fr 1fr; row-gap:44px;} }
+  @media(max-width:560px){ .foot-grid{grid-template-columns:1fr;} }
+  .foot-logo{ font-family:var(--f-display); font-size:24px; font-weight:600; }
+  .foot-desc{ margin-top:18px; font-size:14px; color:rgba(244,238,224,.6); line-height:1.65; max-width:280px; }
+  .foot-status{ display:inline-flex; align-items:center; gap:8px; margin-top:22px; font-family:var(--f-mono); font-size:11.5px; color:var(--mustard); border:1px solid var(--line-on-ink); padding:7px 12px; }
+  .foot-status::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--mustard); }
+  .foot-col h5{ font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--sand); margin-bottom:20px; }
+  .foot-col a, .foot-col p{ display:block; font-size:14px; color:rgba(244,238,224,.72); margin-bottom:13px; transition:color .25s; }
+  .foot-col a:hover{ color:var(--mustard); }
+  .foot-form{ display:flex; margin-top:8px; border:1px solid var(--line-on-ink); }
+  .foot-form input{ flex:1; background:transparent; border:none; padding:12px 14px; color:var(--paper); font-family:var(--f-body); font-size:13.5px; outline:none;}
+  .foot-form button{ background:var(--mustard); border:none; padding:0 18px; font-family:var(--f-mono); font-size:12px; cursor:pointer; }
+  .foot-bottom{ border-top:1px solid var(--line-on-ink); padding:26px 0; display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color:rgba(244,238,224,.45); flex-wrap:wrap; gap:12px; }
+  .foot-social{ display:flex; gap:16px; }
+
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#" class="logo">SGS<span>SANSKAR GROWTH SOLUTIONS</span></a>
+    <div class="navlinks">
+      <a href="#solutions">Solutions</a>
+      <a href="#industries">Industries</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#insights">Insights</a>
+    </div>
+    <div class="navcta">
+      <a href="#" class="btn ghost">Growth Diagnostic</a>
+      <a href="#" class="btn">Let's Talk</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <svg class="engine-svg" viewBox="0 0 600 600" fill="none">
+    <circle cx="470" cy="120" r="7" fill="#DEA430"/>
+    <circle cx="320" cy="60" r="4" fill="#545C3B"/>
+    <circle cx="180" cy="200" r="5" fill="#DEA430"/>
+    <circle cx="460" cy="340" r="6" fill="#545C3B"/>
+    <circle cx="260" cy="420" r="4" fill="#DEA430"/>
+    <circle cx="90" cy="360" r="5" fill="#545C3B"/>
+    <path d="M470 120 C 400 40, 300 40, 320 60 C 350 100, 220 150, 180 200 C 130 260, 220 300, 260 300 C 340 300, 400 300, 460 340 C 500 370, 380 400, 260 420 C 160 436, 60 400, 90 360"
+      stroke="#545C3B" stroke-width="1.2" stroke-dasharray="4 6" opacity=".6"/>
+    <path d="M470 120 C 420 180, 460 260, 460 340" stroke="#DEA430" stroke-width="1.4" opacity=".7"/>
+    <circle cx="470" cy="120" r="26" stroke="#DEA430" stroke-width="1" opacity=".4"/>
+    <circle cx="260" cy="420" r="40" stroke="#545C3B" stroke-width="1" opacity=".35"/>
+  </svg>
+
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow rv in">Growth Operating Layer — For Modern Businesses</div>
+      <h1 class="rv in rv2">
+        <span class="fade">Stop hiring</span><br>
+        <span class="fade">fragmented vendors.</span><br>
+        <span class="mark"><span class="bg"></span>Scale with one<br>unified&nbsp;engine.</span>
+      </h1>
+      <div class="hero-sub rv in rv3">
+        <p>We integrate high-intent marketing, fast digital platforms, and automated CRM pipelines into a single operating system that drives predictable revenue — built for businesses done juggling six agencies for one outcome.</p>
+      </div>
+      <div class="hero-ctas rv in rv4">
+        <a href="#" class="btn">Start a Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#" class="btn ghost">60s Growth Diagnostic</a>
+      </div>
+    </div>
+    <div class="hero-side rv in rv3">
+      <div class="hero-side-inner">
+        <div class="num">01 · WHY SGS EXISTS</div>
+        <p class="desc">Most businesses run marketing, web, CRM and brand through five disconnected vendors that don't talk to each other — leaking leads at every handoff.</p>
+      </div>
+      <div class="hero-side-inner" style="margin-top:34px;">
+        <div class="num">02 · WHAT CHANGES</div>
+        <p class="desc">SGS replaces the stack with one accountable system — attract, convert and scale, engineered and owned end-to-end.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stage-strip rv in">
+      <div class="stage">
+        <div class="tag">01 · Attract</div>
+        <h4>Targeted Inbound Demand</h4>
+        <p>High-intent search &amp; precision paid media that capture ready-to-buy decision makers.</p>
+      </div>
+      <div class="stage">
+        <div class="tag">02 · Convert</div>
+        <h4>High-Speed Web Platforms</h4>
+        <p>Fast, interactive landing environments designed to qualify leads and maximize close rates.</p>
+      </div>
+      <div class="stage">
+        <div class="tag">03 · Scale</div>
+        <h4>CRM &amp; Workflow Automation</h4>
+        <p>Instant WhatsApp notifications, automated sales follow-ups, and zero lead leakage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INDUSTRIES MARQUEE ================= -->
+<div class="marquee-wrap" id="industries">
+  <div class="marquee-label">Trusted architectures deployed across vertical industries</div>
+  <div class="marquee">
+    <span>Real Estate &amp; Property</span>
+    <span>Architecture &amp; Interiors</span>
+    <span>High-Ticket B2B &amp; Legal</span>
+    <span>Technology &amp; SaaS</span>
+    <span>Manufacturing &amp; SMEs</span>
+    <span>Real Estate &amp; Property</span>
+    <span>Architecture &amp; Interiors</span>
+    <span>High-Ticket B2B &amp; Legal</span>
+    <span>Technology &amp; SaaS</span>
+    <span>Manufacturing &amp; SMEs</span>
+  </div>
+</div>
+
+<!-- ================= CAPABILITIES ================= -->
+<section class="sec" id="solutions">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow rv in">Capabilities</div>
+        <h2 class="rv in rv2">A cohesive growth layer for<br>your entire commercial stack.</h2>
+      </div>
+      <p class="r rv in rv3">Everything your business needs to acquire high-value customers and modernize operations — owned by one team, not five.</p>
+    </div>
+
+    <div class="cap-list">
+      <div class="cap-row rv">
+        <div class="stage-tag">Stage · Attract</div>
+        <h3>Digital Growth</h3>
+        <div class="body">
+          <p>Turn visibility into measurable business growth through channels built for intent, not impressions.</p>
+          <ul class="deliv">
+            <li>Omnichannel demand architecture</li>
+            <li>High-converting ad campaigns &amp; creative sets</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cap-row rv">
+        <div class="stage-tag">Stage · Convert</div>
+        <h3>Technology Solutions</h3>
+        <div class="body">
+          <p>Build the digital infrastructure behind your business — engineered for speed, not templates.</p>
+          <ul class="deliv">
+            <li>Enterprise-grade web application</li>
+            <li>Unified CRM data pipeline &amp; webhook integration</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cap-row rv">
+        <div class="stage-tag">Stage · Convert</div>
+        <h3>Brand &amp; Creative</h3>
+        <div class="body">
+          <p>Create a brand people recognize, trust and remember, across every surface a client touches.</p>
+          <ul class="deliv">
+            <li>Comprehensive brand style guide &amp; asset kit</li>
+            <li>Investor &amp; executive pitch presentations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cap-row rv">
+        <div class="stage-tag">Stage · Attract</div>
+        <h3>Business Media &amp; Authority</h3>
+        <div class="body">
+          <p>Build authority around the people behind your business — the fastest trust shortcut in any category.</p>
+          <ul class="deliv">
+            <li>Executive thought leadership calendar &amp; articles</li>
+            <li>Published business profile &amp; media features</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cap-row rv">
+        <div class="stage-tag">Stage · Scale</div>
+        <h3>Business Consulting</h3>
+        <div class="body">
+          <p>Turn business challenges into actionable growth strategies backed by operating discipline.</p>
+          <ul class="deliv">
+            <li>Comprehensive growth &amp; tech blueprint</li>
+            <li>Sales playbook &amp; conversion SOPs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section class="sec" id="work" style="background:var(--paper-2); padding-bottom:130px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow rv in">Selected Work</div>
+        <h2 class="rv in rv2">Proven commercial results.</h2>
+      </div>
+      <a href="#" class="readmore rv in rv3" style="margin-top:0;">View all case studies <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <div class="work-grid rv">
+      <div class="work-card">
+        <div class="work-top"><span class="work-cat">Interior Design &amp; Architecture</span><span class="work-loc">Pune, Maharashtra</span></div>
+        <h3>ABC Interiors</h3>
+        <p class="work-desc">Brand repositioning, editorial portfolio web platform, and targeted homeowner inquiry acquisition for an established interior design studio.</p>
+        <div class="outcome"><div class="lbl">Outcome</div><p>Established distinctive luxury market positioning commanding higher initial design consultation fees.</p></div>
+        <a href="#" class="readmore">Read case study breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="work-card">
+        <div class="work-top"><span class="work-cat">Real Estate &amp; Property Development</span><span class="work-loc">Western India Region</span></div>
+        <h3>Apex Realty Group</h3>
+        <p class="work-desc">Integrated project launch ecosystem, immersive microsite, and automated lead distribution for a multi-unit premium residential enclave.</p>
+        <div class="outcome"><div class="lbl">Outcome</div><p>Substantially reduced prospect response latency from over 24 hours down to under 2 minutes.</p></div>
+        <a href="#" class="readmore">Read case study breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="work-card">
+        <div class="work-top"><span class="work-cat">Professional Services &amp; Corporate Advisory</span><span class="work-loc">Mumbai &amp; Pune</span></div>
+        <h3>FinEdge Advisory Partners</h3>
+        <p class="work-desc">Corporate brand elevation, executive thought leadership positioning, and inbound corporate consultation pipeline for a financial advisory firm.</p>
+        <div class="outcome"><div class="lbl">Outcome</div><p>Enhanced institutional credibility during high-stakes enterprise advisory pitches and investor reviews.</p></div>
+        <a href="#" class="readmore">Read case study breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="work-card">
+        <div class="work-top"><span class="work-cat">SMEs &amp; Growing Enterprises</span><span class="work-loc">Maharashtra Region</span></div>
+        <h3>Nova Distribution &amp; Commerce</h3>
+        <p class="work-desc">End-to-end digital modernization: custom B2B ordering portal, automated inventory inquiry sync, and multi-channel commercial growth.</p>
+        <div class="outcome"><div class="lbl">Outcome</div><p>Replaced cumbersome paper catalogs with an always-updated, instant mobile-friendly digital catalog.</p></div>
+        <a href="#" class="readmore">Read case study breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-sec" id="about">
+  <svg class="cta-line" style="top:-60px; left:-80px; width:420px;" viewBox="0 0 400 400" fill="none">
+    <circle cx="60" cy="60" r="5" fill="#DEA430"/>
+    <circle cx="260" cy="140" r="4" fill="#7C8259"/>
+    <circle cx="140" cy="300" r="6" fill="#DEA430"/>
+    <path d="M60 60 C 160 20, 220 100, 260 140 C 320 200, 180 250, 140 300" stroke="#7C8259" stroke-width="1" stroke-dasharray="3 6"/>
+  </svg>
+  <svg class="cta-line" style="bottom:-100px; right:-60px; width:380px;" viewBox="0 0 400 400" fill="none">
+    <circle cx="320" cy="320" r="50" stroke="#DEA430" stroke-width="1" opacity=".5"/>
+    <circle cx="200" cy="200" r="5" fill="#DEA430"/>
+    <path d="M320 320 C 260 280, 240 240, 200 200" stroke="#DEA430" stroke-width="1"/>
+  </svg>
+  <div class="wrap cta-inner">
+    <div class="eyebrow on-ink rv in" style="justify-content:center;">Let's Talk</div>
+    <h2 class="rv in rv2">Ready to build a <i>predictable</i><br>growth system?</h2>
+    <p class="rv in rv3">Tell us about your current commercial objectives. We'll map the exact marketing channels, software architecture, and automations needed to scale.</p>
+    <div class="cta-ctas rv in rv4">
+      <a href="#" class="btn on-ink">Schedule a Consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#" class="btn ghost-ink">Take 60s Diagnostic</a>
+    </div>
+    <div class="cta-contact rv in">hello@sanskargrowthsolutions.com · Pune, India</div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-logo">SGS</div>
+      <p class="foot-desc">We build digital growth systems that help businesses attract, convert, and scale — combining brand, technology, marketing, automation, and consulting into one unified operating layer.</p>
+      <div class="foot-status">All Systems Operational · Pune, India</div>
+    </div>
+    <div class="foot-col">
+      <h5>Growth Capabilities</h5>
+      <a href="#">Digital Growth</a>
+      <a href="#">Technology Solutions</a>
+      <a href="#">Brand &amp; Creative</a>
+      <a href="#">Business Media &amp; Authority</a>
+      <a href="#">Business Consulting</a>
+    </div>
+    <div class="foot-col">
+      <h5>Industries We Serve</h5>
+      <a href="#">Real Estate &amp; Property Development</a>
+      <a href="#">Architecture &amp; Interiors</a>
+      <a href="#">Professional Services &amp; Advisory</a>
+      <a href="#">Startups &amp; Emerging Tech</a>
+      <a href="#">SMEs &amp; Growing Enterprises</a>
+    </div>
+    <div class="foot-col">
+      <h5>Stay Informed</h5>
+      <p style="margin-bottom:16px;">Executive insights on digital growth systems, performance marketing, and business automation.</p>
+      <form class="foot-form" onsubmit="return false;">
+        <input type="email" placeholder="Enter work email">
+        <button>Join</button>
+      </form>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <div>© 2026 Sanskar Growth Solutions (SGS). All rights reserved.</div>
+    <div class="foot-social">
+      <a href="#">In</a><a href="#">Ig</a><a href="#">X</a>
+    </div>
+    <div>sanskargrowthsolutions.com</div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const rv = document.querySelectorAll('.rv:not(.in)');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15});
+  rv.forEach(el=>io.observe(el));
+
+  // header hide on scroll down
+  let lastY = window.scrollY;
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    if(y > lastY && y > 140){ header.classList.add('hide'); }
+    else { header.classList.remove('hide'); }
+    lastY = y;
+  });
+
+  // subtle parallax on hero svg
+  const engine = document.querySelector('.engine-svg');
+  window.addEventListener('scroll', ()=>{
+    if(!engine) return;
+    const y = window.scrollY;
+    engine.style.transform = `translateY(${y*0.12}px) rotate(${y*0.01}deg)`;
+  });
+</script>
+</body>
+</html>

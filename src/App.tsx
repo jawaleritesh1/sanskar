@@ -179,16 +179,23 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-[#F1F5F9] font-sans flex flex-col selection:bg-[#F97316]/30 selection:text-white">
+    <div className="min-h-screen bg-[#F7F9FF] text-[#092B78] font-sans flex flex-col selection:bg-[#FF4B16] selection:text-white relative">
+      {/* Global Fixed Muted Architectural Background */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0 bg-cover bg-right sm:bg-center bg-no-repeat opacity-[0.22] mix-blend-multiply"
+        style={{ backgroundImage: `url('/assets/backgrounds/bgy.png')` }}
+      />
+
       {/* Global Responsive Navigation */}
       <Navbar
         currentPath={currentPath}
         onNavigate={navigate}
         onOpenProjectModal={() => handleOpenProjectModal()}
+        onOpenDiagnostic={handleOpenDiagnostic}
       />
 
       {/* Main View Container */}
-      <main className="flex-grow w-full">
+      <main className="flex-grow w-full relative z-10">
         {renderCurrentView()}
       </main>
 
@@ -196,6 +203,7 @@ export default function App() {
       <Footer
         onNavigate={navigate}
         onOpenProjectModal={() => handleOpenProjectModal()}
+        onOpenDiagnostic={handleOpenDiagnostic}
       />
 
       {/* Interactive Modals */}

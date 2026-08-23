@@ -1,5 +1,28 @@
 import React, { useState } from 'react';
-import { ArrowRight, Check, CheckCircle2, ChevronDown, Layers, Target, Zap, Cpu, Sparkles, TrendingUp, Code2, Newspaper, Compass } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  ChevronDown,
+  Layers,
+  Target, 
+  Zap,
+  Cpu,
+  Sparkles,
+  TrendingUp,
+  Code2,
+  Newspaper,
+  Compass, 
+  Shield,
+  Clock,
+  BarChart3,
+  Activity,
+  ArrowUpRight,
+  HelpCircle,
+  ShieldCheck,
+  Rocket
+} from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import { solutionsData } from '../data/solutionsData';
 import { ServiceItem, GrowthSolution } from '../types';
@@ -11,6 +34,15 @@ interface SolutionsViewProps {
   onOpenDiagnostic: () => void;
 }
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export const SolutionsView: React.FC<SolutionsViewProps> = ({
   initialServiceSlug,
   onNavigate,
@@ -20,234 +52,327 @@ export const SolutionsView: React.FC<SolutionsViewProps> = ({
   const [selectedServiceSlug, setSelectedServiceSlug] = useState<string>(
     initialServiceSlug || 'digital-growth'
   );
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(null);
+  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
 
   const currentService = servicesData.find(s => s.slug === selectedServiceSlug) || servicesData[0];
 
-  const getServiceIcon = (id: string) => {
+  const getServiceIcon = (id: string, isSelected: boolean) => {
+    const iconClass = isSelected ? "text-[#FF4B16]" : "text-[#092B78]";
     switch (id) {
-      case 'digital-growth': return <TrendingUp className="w-5 h-5 text-blue-400" />;
-      case 'technology': return <Code2 className="w-5 h-5 text-emerald-400" />;
-      case 'brand-creative': return <Sparkles className="w-5 h-5 text-orange-400" />;
-      case 'business-media': return <Newspaper className="w-5 h-5 text-purple-400" />;
-      case 'business-consulting': return <Compass className="w-5 h-5 text-yellow-400" />;
-      default: return <Layers className="w-5 h-5 text-blue-400" />;
+      case 'digital-growth': return <TrendingUp className={`w-5 h-5 ${iconClass}`} />;
+      case 'technology': return <Code2 className={`w-5 h-5 ${iconClass}`} />;
+      case 'brand-creative': return <Sparkles className={`w-5 h-5 ${iconClass}`} />;
+      case 'business-media': return <Newspaper className={`w-5 h-5 ${iconClass}`} />;
+      case 'business-consulting': return <Compass className={`w-5 h-5 ${iconClass}`} />;
+      default: return <Layers className={`w-5 h-5 ${iconClass}`} />;
     }
   };
 
   return (
-    <div className="w-full bg-[#0B0F19] text-[#F1F5F9] pt-28 pb-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="w-full bg-transparent text-[#092B78] pt-28 sm:pt-32 pb-24 font-sans selection:bg-[#FF4B16] selection:text-white overflow-x-hidden">
+      
+      {/* Background Ambient Glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.6)_0%,rgba(247,249,255,0.25)_45%,rgba(234,240,255,0.5)_100%)]" />
+        <motion.div
+          animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.45, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#C8D8FF] blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.16, 0.08] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute right-0 top-96 h-[500px] w-[500px] rounded-full bg-[#FF4B16] blur-[140px]"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Page Hero */}
-        <div className="max-w-4xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold uppercase tracking-wider mb-4">
-            <Layers className="w-3.5 h-3.5 text-[#F97316]" />
-            SOLUTIONS & CAPABILITIES
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          className="max-w-4xl mb-16"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-[2px] w-8 bg-[#FF4B16]" />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#092B78]">
+              Engineered Growth Capabilities
+            </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white font-sans leading-tight">
-            Everything you need to build, market and scale.
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-[#092B78] leading-[1.08]">
+            Integrated Digital Systems <br />
+            To{" "}
+            <span className="relative inline-block text-[#FF4B16]">
+              Attract, Convert & Scale
+              <motion.span
+                animate={{ scaleX: [0, 1, 1] }}
+                transition={{ duration: 1.1, delay: 0.5 }}
+                className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-[#FF4B16]/30"
+              />
+            </span>
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-400 font-sans leading-relaxed">
-            We don't sell disconnected agency deliverables. We engineer synchronized digital growth systems combining marketing, modern engineering, brand authority, and strategic consulting.
+
+          <p className="mt-6 text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
+            We don't sell disconnected agency deliverables. We engineer synchronized digital growth systems combining performance marketing, custom web engineering, brand authority, and strategic automation into one scalable operating layer.
           </p>
-        </div>
+        </motion.div>
 
         {/* 5 Capability Selector Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-12">
-          {servicesData.map((s) => (
-            <button
-              key={s.slug}
-              onClick={() => {
-                setSelectedServiceSlug(s.slug);
-                setOpenFaqIdx(null);
-              }}
-              className={`p-4 rounded-xl text-left border transition-all duration-200 flex flex-col justify-between ${
-                selectedServiceSlug === s.slug
-                  ? 'bg-slate-900 border-orange-500/80 shadow-lg shadow-orange-500/10 ring-1 ring-orange-500/30'
-                  : 'bg-slate-900/40 border-slate-800 hover:bg-slate-900/80 hover:border-slate-700'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center">
-                  {getServiceIcon(s.id)}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 mb-12">
+          {servicesData.map((s) => {
+            const isSelected = selectedServiceSlug === s.slug;
+            return (
+              <button
+                key={s.slug}
+                onClick={() => {
+                  setSelectedServiceSlug(s.slug);
+                  setOpenFaqIdx(0);
+                }}
+                className={`group p-5 rounded-2xl text-left border transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
+                  isSelected
+                    ? 'bg-[#092B78] text-white border-[#092B78] shadow-xl shadow-[#092B78]/25 -translate-y-1'
+                    : 'bg-white/80 border-slate-200/80 text-[#092B78] hover:border-[#092B78]/30 hover:bg-white hover:shadow-md'
+                }`}
+              >
+                {/* Top Accent Line for Selected */}
+                {isSelected && (
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#FF4B16] via-[#FFA07A] to-[#FF4B16]" />
+                )}
+
+                <div className="flex items-center justify-between mb-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                    isSelected ? 'bg-white/10 shadow-inner' : 'bg-[#EEF3FF] border border-slate-200/60'
+                  }`}>
+                    {getServiceIcon(s.id, isSelected)}
+                  </div>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                    isSelected
+                      ? 'bg-[#FF4B16]/20 text-[#FFA07A] border border-[#FF4B16]/30'
+                      : 'bg-[#EEF3FF] text-[#092B78]'
+                  }`}>
+                    {s.stage}
+                  </span>
                 </div>
-                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">
-                  {s.stage}
-                </span>
-              </div>
-              <div>
-                <div className="text-sm font-bold text-white">{s.title}</div>
-                <div className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">{s.category}</div>
-              </div>
-            </button>
-          ))}
+
+                <div>
+                  <div className={`text-sm font-bold leading-tight ${isSelected ? 'text-white' : 'text-[#092B78]'}`}>
+                    {s.title}
+                  </div>
+                  <div className={`text-[11px] font-medium mt-1 line-clamp-1 ${isSelected ? 'text-slate-300' : 'text-slate-500'}`}>
+                    {s.category}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         {/* Active Capability Deep-Dive View */}
-        <div className="rounded-3xl bg-slate-900/60 border border-slate-800 p-6 sm:p-12 mb-24 shadow-2xl">
-          
-          {/* Header */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-slate-800 mb-10">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-orange-400">
-                  Growth Stage: {currentService.stage.toUpperCase()}
-                </span>
-                <span className="text-slate-600">•</span>
-                <span className="text-xs text-slate-400">{currentService.category}</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-                {currentService.title}
-              </h2>
-              <p className="text-base text-slate-300 mt-2 max-w-2xl">
-                {currentService.tagline}
-              </p>
-            </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentService.slug}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.35 }}
+            className="rounded-3xl bg-white border border-slate-200/80 p-7 sm:p-12 mb-24 shadow-[0_20px_50px_rgba(9,43,120,0.06)] relative overflow-hidden"
+          >
+            {/* Top Accent Line */}
+            <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#071F5B] via-[#2563EB] to-[#071F5B]" />
 
-            <button
-              onClick={() => onOpenProjectModal(currentService.slug)}
-              className="px-6 py-3.5 rounded-xl bg-[#F97316] hover:bg-orange-600 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-orange-500/20 active:scale-[0.98] transition-all self-start lg:self-auto"
-            >
-              <span>Inquire for {currentService.title}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Overview & Core Outcome */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
-            <div className="lg:col-span-7 space-y-4">
-              <h3 className="text-xs uppercase font-bold text-slate-400 tracking-wider">
-                Strategic Scope & Philosophy
-              </h3>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                {currentService.description}
-              </p>
-            </div>
-
-            <div className="lg:col-span-5 p-6 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2">
-              <span className="text-xs uppercase font-bold text-orange-400 tracking-wider block">
-                Primary Business Outcome
-              </span>
-              <p className="text-sm font-semibold text-white">
-                {currentService.businessOutcome}
-              </p>
-            </div>
-          </div>
-
-          {/* Capabilities & Concrete Deliverables */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            
-            {/* Capabilities */}
-            <div className="p-6 rounded-2xl bg-slate-950/40 border border-slate-800/80">
-              <h3 className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-4">
-                Execution Capabilities
-              </h3>
-              <ul className="space-y-3">
-                {currentService.capabilities.map((cap, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-200">
-                    <Check className="w-4 h-4 text-[#F97316] shrink-0 mt-0.5" />
-                    <span>{cap}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Deliverables */}
-            <div className="p-6 rounded-2xl bg-slate-950/40 border border-slate-800/80">
-              <h3 className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-4">
-                What We Deliver
-              </h3>
-              <ul className="space-y-3">
-                {currentService.deliverables.map((deliv, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                    <span>{deliv}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-          </div>
-
-          {/* Process Timeline */}
-          <div className="mb-12">
-            <h3 className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-6">
-              Execution Process
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {currentService.process.map((p, idx) => (
-                <div key={idx} className="p-5 rounded-xl bg-slate-950/60 border border-slate-800">
-                  <span className="text-xs font-mono font-bold text-orange-400 block mb-2">
-                    STEP {p.step}
+            {/* Capability Header */}
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-slate-200/80 mb-10 relative z-10">
+              <div>
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#FF4B16]">
+                    GROWTH STAGE: {currentService.stage.toUpperCase()}
                   </span>
-                  <div className="text-sm font-bold text-white mb-1">{p.title}</div>
-                  <div className="text-xs text-slate-400 leading-relaxed">{p.desc}</div>
+                  <span className="text-slate-300">•</span>
+                  <span className="text-xs text-slate-500 font-semibold">{currentService.category}</span>
                 </div>
-              ))}
-            </div>
-          </div>
+                <h2 className="text-3xl sm:text-4xl font-bold text-[#092B78] tracking-tight">
+                  {currentService.title}
+                </h2>
+                <p className="text-sm sm:text-base text-slate-600 mt-2.5 max-w-2xl leading-relaxed">
+                  {currentService.tagline}
+                </p>
+              </div>
 
-          {/* FAQs */}
-          <div>
-            <h3 className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-4">
-              Frequently Addressed Questions
-            </h3>
-            <div className="space-y-3">
-              {currentService.faqs.map((faq, idx) => (
-                <div key={idx} className="rounded-xl bg-slate-950/70 border border-slate-800 overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaqIdx(openFaqIdx === idx ? null : idx)}
-                    className="w-full p-4 text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-white hover:text-orange-400 transition-colors"
-                  >
-                    <span>{faq.question}</span>
-                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${openFaqIdx === idx ? 'rotate-180' : ''}`} />
-                  </button>
-                  {openFaqIdx === idx && (
-                    <div className="p-4 pt-0 text-xs sm:text-sm text-slate-300 border-t border-slate-800/80 leading-relaxed">
-                      {faq.answer}
-                    </div>
-                  )}
+              <button
+                onClick={() => onOpenProjectModal(currentService.slug)}
+                className="group flex items-center gap-3 rounded-full bg-[#092B78] px-7 py-3.5 text-xs sm:text-sm font-semibold text-white shadow-xl shadow-[#092B78]/20 transition-all duration-300 hover:-translate-y-1 hover:bg-[#071F5B] hover:shadow-2xl self-start lg:self-auto"
+              >
+                <span>Deploy {currentService.title}</span>
+                <ArrowRight size={16} className="text-[#FF4B16] transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            </div>
+
+            {/* Overview & Core Outcome Bento */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 relative z-10">
+              <div className="lg:col-span-7 space-y-3.5">
+                <div className="flex items-center gap-2">
+                  <span className="h-[2px] w-4 bg-[#FF4B16]" />
+                  <h3 className="text-xs uppercase font-bold text-[#092B78] tracking-wider">
+                    Strategic Scope & Commercial Objective
+                  </h3>
                 </div>
-              ))}
-            </div>
-          </div>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                  {currentService.description}
+                </p>
+              </div>
 
-        </div>
+              <div className="lg:col-span-5 p-6 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/15 space-y-2 relative overflow-hidden">
+                <div className="flex items-center gap-2">
+                  <Sparkles size={16} className="text-[#FF4B16]" />
+                  <span className="text-[11px] uppercase font-bold text-[#092B78] tracking-wider block">
+                    Primary Commercial Outcome
+                  </span>
+                </div>
+                <p className="text-sm sm:text-base font-bold text-[#092B78]">
+                  {currentService.businessOutcome}
+                </p>
+              </div>
+            </div>
+
+            {/* Execution Capabilities & Deliverables Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative z-10">
+              
+              {/* Capabilities */}
+              <div className="p-7 rounded-2xl bg-[#F8FAFC] border border-slate-200/80">
+                <div className="flex items-center justify-between mb-5">
+                  <h3 className="text-xs uppercase font-bold text-[#092B78] tracking-wider flex items-center gap-2">
+                    <span className="h-[2px] w-3 bg-[#FF4B16]" />
+                    <span>Execution Capabilities</span>
+                  </h3>
+                  <span className="text-[11px] font-semibold text-slate-500">Integrated Stack</span>
+                </div>
+                <ul className="space-y-3">
+                  {currentService.capabilities.map((cap, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 font-medium">
+                      <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#EEF3FF]">
+                        <Check size={12} className="text-[#092B78] font-bold" />
+                      </div>
+                      <span>{cap}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Deliverables */}
+              <div className="p-7 rounded-2xl bg-[#F8FAFC] border border-slate-200/80">
+                <div className="flex items-center justify-between mb-5">
+                  <h3 className="text-xs uppercase font-bold text-[#092B78] tracking-wider flex items-center gap-2">
+                    <span className="h-[2px] w-3 bg-[#FF4B16]" />
+                    <span>Concrete Deliverables</span>
+                  </h3>
+                  <span className="text-[11px] font-semibold text-slate-500">Assets & Systems</span>
+                </div>
+                <ul className="space-y-3">
+                  {currentService.deliverables.map((deliv, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 font-medium">
+                      <CheckCircle2 size={16} className="text-[#FF4B16] shrink-0 mt-0.5" />
+                      <span>{deliv}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+
+            {/* Process Journey */}
+            <div className="mb-12 relative z-10">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="h-[2px] w-4 bg-[#FF4B16]" />
+                <h3 className="text-xs uppercase font-bold text-[#092B78] tracking-wider">
+                  Execution Methodology
+                </h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {currentService.process.map((p, idx) => (
+                  <div key={idx} className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:border-[#092B78]/40 hover:shadow-md transition-all">
+                    <span className="text-xs font-bold text-[#FF4B16] block mb-2">
+                      PHASE {p.step}
+                    </span>
+                    <div className="text-sm font-bold text-[#092B78] mb-1.5">{p.title}</div>
+                    <div className="text-xs text-slate-600 leading-relaxed">{p.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* FAQs Accordion */}
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-5">
+                <HelpCircle size={16} className="text-[#FF4B16]" />
+                <h3 className="text-xs uppercase font-bold text-[#092B78] tracking-wider">
+                  Frequently Addressed Questions
+                </h3>
+              </div>
+              <div className="space-y-3">
+                {currentService.faqs.map((faq, idx) => (
+                  <div key={idx} className="rounded-2xl bg-[#F8FAFC] border border-slate-200/80 overflow-hidden transition-all">
+                    <button
+                      onClick={() => setOpenFaqIdx(openFaqIdx === idx ? null : idx)}
+                      className="w-full p-5 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-[#092B78] hover:text-[#FF4B16] transition-colors"
+                    >
+                      <span>{faq.question}</span>
+                      <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${openFaqIdx === idx ? 'rotate-180 text-[#FF4B16]' : ''}`} />
+                    </button>
+                    {openFaqIdx === idx && (
+                      <div className="p-5 pt-0 text-xs sm:text-sm text-slate-600 border-t border-slate-200/80 leading-relaxed bg-white">
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </motion.div>
+        </AnimatePresence>
 
         {/* 4 Outcome-Oriented Growth Solutions Section */}
-        <div className="mb-16">
+        <div className="mb-20">
           <div className="max-w-3xl mb-8">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-orange-400">
-              Outcome-Oriented Packages
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-[2px] w-4 bg-[#FF4B16]" />
+              <span className="text-xs font-bold uppercase tracking-wider text-[#FF4B16]">
+                Outcome-Oriented Packages
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#092B78] mt-1">
               Need a packaged solution tailored to your stage?
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
-              Choose an outcome-oriented package to solve a specific commercial bottleneck.
+            <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              Choose an outcome-oriented package to solve a specific commercial bottleneck with defined milestones.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {solutionsData.map((sol) => (
               <div
                 key={sol.slug}
-                className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:bg-slate-900/80 transition-all flex flex-col justify-between"
+                className="relative overflow-hidden p-7 rounded-3xl bg-white border border-slate-200/80 hover:border-[#092B78]/40 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group shadow-sm hover:-translate-y-1"
               >
+                {/* Top Hover Gradient Line */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#092B78] via-[#FF4B16] to-[#FFA07A] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-lg font-bold text-white">{sol.title}</span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xl font-bold text-[#092B78]">{sol.title}</span>
+                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#EEF3FF] text-[#092B78] border border-[#092B78]/10">
                       {sol.badge}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-400 mb-4">{sol.tagline}</p>
+                  <p className="text-xs text-slate-600 mb-5 leading-relaxed">{sol.tagline}</p>
                   
-                  <div className="space-y-1.5 mb-6 text-xs text-slate-300">
+                  <div className="space-y-2 mb-6 text-xs text-slate-700">
                     {sol.includedModules.slice(0, 3).map((m, idx) => (
-                      <div key={idx} className="flex items-center gap-1.5">
-                        <span className="w-1 h-1 rounded-full bg-orange-400"></span>
+                      <div key={idx} className="flex items-center gap-2 font-medium">
+                        <Check size={14} className="text-[#FF4B16] shrink-0" />
                         <span>{m}</span>
                       </div>
                     ))}
@@ -256,38 +381,47 @@ export const SolutionsView: React.FC<SolutionsViewProps> = ({
 
                 <button
                   onClick={() => onOpenProjectModal(sol.slug)}
-                  className="w-full py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold flex items-center justify-center gap-1"
+                  className="w-full py-3 px-4 rounded-full bg-[#EEF3FF] hover:bg-[#092B78] hover:text-white text-[#092B78] text-xs font-bold flex items-center justify-center gap-2 transition-all duration-300 border border-[#092B78]/20 hover:border-[#092B78] group/btn"
                 >
                   <span>Inquire for {sol.title}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-orange-400" />
+                  <ArrowRight size={14} className="text-[#FF4B16] transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </button>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-[#0F172A] to-slate-900 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-xl font-bold text-white">
-              Unsure which capability or growth solution fits your current stage?
+        {/* Bottom Consultation Banner */}
+        <div className="relative overflow-hidden rounded-3xl bg-[#051336] p-8 sm:p-12 border border-slate-800/80 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl text-white">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#FF4B16]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#092B78]/50 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#FF4B16] border border-white/10 mb-3 backdrop-blur-sm">
+              <Rocket size={13} />
+              <span>Tailored Growth Architecture</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+              Unsure which capability fits your current growth bottleneck?
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
-              Take our interactive 60-second diagnostic or schedule an architectural discovery call with our team.
+            <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+              Take our interactive 60-second diagnostic or schedule an architectural discovery consultation with our partners.
             </p>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
+
+          <div className="flex flex-wrap items-center gap-4 shrink-0 relative z-10">
             <button
               onClick={onOpenDiagnostic}
-              className="px-4 py-2.5 rounded-lg border border-slate-700 bg-slate-800 text-xs font-semibold text-slate-200 hover:text-white"
+              className="px-6 py-3.5 rounded-full border border-white/20 bg-white/10 text-xs font-semibold text-white hover:bg-white/20 transition-all backdrop-blur-md hover:-translate-y-0.5"
             >
-              Take Diagnostic
+              Take 60s Diagnostic
             </button>
             <button
               onClick={() => onOpenProjectModal()}
-              className="px-5 py-2.5 rounded-lg bg-[#F97316] text-xs font-semibold text-white hover:bg-orange-600 shadow-md shadow-orange-500/20"
+              className="flex items-center gap-2 rounded-full bg-[#FF4B16] px-7 py-3.5 text-xs sm:text-sm font-semibold text-white shadow-xl shadow-[#FF4B16]/25 transition-all duration-300 hover:bg-[#E03E0E] hover:-translate-y-0.5 active:scale-95"
             >
-              Start Conversation
+              <span>Start Conversation</span>
+              <ArrowRight size={15} />
             </button>
           </div>
         </div>

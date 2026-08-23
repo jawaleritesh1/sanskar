@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, PhoneCall, Send, ShieldCheck, CheckCircle2, MessageSquare, Clock, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, MapPin, PhoneCall, Send, ShieldCheck, CheckCircle2, MessageSquare, Clock, ArrowRight, Sparkles } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import { solutionsData } from '../data/solutionsData';
 
@@ -7,6 +8,15 @@ interface ContactViewProps {
   onNavigate: (path: string) => void;
   onOpenDiagnostic: () => void;
 }
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export const ContactView: React.FC<ContactViewProps> = ({
   onNavigate,
@@ -17,7 +27,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
   const [workEmail, setWorkEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [website, setWebsite] = useState('');
-  const [selectedService, setSelectedService] = useState('generate');
+  const [selectedService, setSelectedService] = useState('digital-growth');
   const [budgetRange, setBudgetRange] = useState('₹1L – ₹3L / Project or Mo');
   const [projectTimeline, setProjectTimeline] = useState('Within 30 Days');
   const [message, setMessage] = useState('');
@@ -55,91 +65,127 @@ export const ContactView: React.FC<ContactViewProps> = ({
   };
 
   return (
-    <div className="w-full bg-[#0B0F19] text-[#F1F5F9] pt-28 pb-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="w-full bg-transparent text-[#092B78] pt-28 sm:pt-32 pb-24 font-sans selection:bg-[#FF4B16] selection:text-white overflow-x-hidden">
+      
+      {/* Subtle Ambient Radial Lighting */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.6)_0%,rgba(247,249,255,0.25)_45%,rgba(234,240,255,0.5)_100%)]" />
+        <motion.div
+          animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.45, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#C8D8FF] blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.16, 0.08] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute right-0 top-96 h-[500px] w-[500px] rounded-full bg-[#FF4B16] blur-[140px]"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="max-w-4xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold uppercase tracking-wider mb-4">
-            <MessageSquare className="w-3.5 h-3.5 text-[#F97316]" />
-            START A CONVERSATION
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          className="max-w-4xl mb-16"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-[2px] w-8 bg-[#FF4B16]" />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#092B78]">
+              Contact Sanskar Growth Solutions
+            </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white font-sans leading-tight">
-            Let's build your next stage of growth.
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-[#092B78] leading-[1.08]">
+            Let's Build Your Next Stage of{" "}
+            <span className="relative inline-block text-[#FF4B16]">
+              Growth & Scale
+              <motion.span
+                animate={{ scaleX: [0, 1, 1] }}
+                transition={{ duration: 1.1, delay: 0.5 }}
+                className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-[#FF4B16]/30"
+              />
+            </span>
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-400 font-sans leading-relaxed">
-            Tell us what you're trying to achieve. We'll help you identify what needs to be built, marketed, or transformed across your operating layer.
+
+          <p className="mt-6 text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
+            Tell us what you're aiming to achieve. We'll help you architect the exact systems needed to attract high-value buyers, optimize conversions, and scale operations.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Direct Corporate Information */}
           <div className="lg:col-span-5 space-y-8">
             
-            <div className="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-6">
-              <h2 className="text-xl font-bold text-white">Direct Communication Channels</h2>
+            <div className="relative overflow-hidden p-8 rounded-3xl bg-white border border-slate-200/80 space-y-6 shadow-[0_15px_40px_rgba(9,43,120,0.04)]">
+              {/* Top Accent Line */}
+              <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#071F5B] via-[#2563EB] to-[#071F5B]" />
               
-              <div className="space-y-4 text-sm text-slate-300">
+              <h2 className="text-xl font-bold text-[#092B78]">Direct Communication Channels</h2>
+              
+              <div className="space-y-4 text-sm text-slate-700">
                 <div className="flex items-start gap-3.5">
-                  <div className="p-2.5 rounded-xl bg-orange-500/10 border border-orange-500/20 text-[#F97316] shrink-0">
-                    <Mail className="w-5 h-5" />
+                  <div className="p-2.5 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/15 text-[#092B78] shrink-0">
+                    <Mail size={18} className="text-[#FF4B16]" />
                   </div>
                   <div>
-                    <span className="text-xs text-slate-400 block">General & Commercial Inquiries:</span>
-                    <a href="mailto:hello@sanskargrowthsolutions.com" className="font-semibold text-white hover:text-orange-400 transition-colors">
+                    <span className="text-xs text-slate-500 block">General & Commercial Inquiries:</span>
+                    <a href="mailto:hello@sanskargrowthsolutions.com" className="font-semibold text-[#092B78] hover:text-[#FF4B16] transition-colors">
                       hello@sanskargrowthsolutions.com
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 shrink-0">
-                    <MapPin className="w-5 h-5" />
+                  <div className="p-2.5 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/15 text-[#092B78] shrink-0">
+                    <MapPin size={18} className="text-[#092B78]" />
                   </div>
                   <div>
-                    <span className="text-xs text-slate-400 block">Headquarters:</span>
-                    <span className="font-semibold text-white">
+                    <span className="text-xs text-slate-500 block">Headquarters:</span>
+                    <span className="font-semibold text-[#092B78]">
                       Pune, Maharashtra, India
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shrink-0">
-                    <Clock className="w-5 h-5" />
+                  <div className="p-2.5 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/15 text-[#092B78] shrink-0">
+                    <Clock size={18} className="text-[#092B78]" />
                   </div>
                   <div>
-                    <span className="text-xs text-slate-400 block">Response Velocity:</span>
-                    <span className="font-semibold text-white">
+                    <span className="text-xs text-slate-500 block">Response Velocity:</span>
+                    <span className="font-semibold text-[#092B78]">
                       Within 1 Business Day (Guaranteed SLA)
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-800 text-xs text-slate-400">
-                Official Corporate Domain: <strong className="text-white font-mono">sanskargrowthsolutions.com</strong>
+              <div className="pt-4 border-t border-slate-100 text-xs text-slate-500">
+                Official Corporate Domain: <strong className="text-[#092B78]">sanskargrowthsolutions.com</strong>
               </div>
             </div>
 
             {/* Diagnostic Box */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 space-y-3">
-              <span className="text-xs font-mono font-bold uppercase text-orange-400">
+            <div className="p-7 rounded-3xl bg-white border border-slate-200/80 space-y-3 shadow-md">
+              <span className="text-xs font-bold uppercase text-[#FF4B16] tracking-wider block">
                 Unsure Where to Start?
               </span>
-              <h3 className="text-base font-bold text-white">
+              <h3 className="text-lg font-bold text-[#092B78]">
                 Take the 60-Second Growth Diagnostic
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Identify whether your revenue bottleneck is in ATTRACT, CONVERT, or SCALE before our call.
               </p>
               <button
                 onClick={onOpenDiagnostic}
-                className="text-xs font-semibold text-orange-400 hover:text-orange-300 flex items-center gap-1 pt-1"
+                className="text-xs font-bold text-[#FF4B16] hover:text-[#E03E0E] flex items-center gap-1 pt-1"
               >
                 <span>Launch Interactive Diagnostic</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight size={14} />
               </button>
             </div>
 
@@ -147,41 +193,44 @@ export const ContactView: React.FC<ContactViewProps> = ({
 
           {/* Right Column: Contact & Project Intake Form */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-10 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-2xl">
+            <div className="relative overflow-hidden p-8 sm:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-[0_20px_50px_rgba(9,43,120,0.06)]">
               
+              {/* Top Accent Line */}
+              <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#071F5B] via-[#2563EB] to-[#071F5B]" />
+
               {isSubmitted ? (
                 <div className="py-12 text-center space-y-6 animate-in fade-in">
-                  <div className="w-16 h-16 rounded-2xl bg-emerald-950/60 border border-emerald-800 flex items-center justify-center mx-auto text-emerald-400">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="w-16 h-16 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/20 flex items-center justify-center mx-auto text-[#092B78]">
+                    <CheckCircle2 size={36} className="text-[#FF4B16]" />
                   </div>
                   
                   <div className="space-y-2">
-                    <h3 className="text-2xl font-bold text-white">
+                    <h3 className="text-2xl font-bold text-[#092B78]">
                       Consultation Request Received
                     </h3>
-                    <p className="text-sm text-slate-300 max-w-md mx-auto">
-                      Thank you, <strong className="text-white">{fullName}</strong>. Your inquiry for <strong className="text-white">{company}</strong> has been assigned to a senior growth strategist at SGS.
+                    <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                      Thank you, <strong className="text-[#092B78]">{fullName}</strong>. Your inquiry for <strong className="text-[#092B78]">{company}</strong> has been assigned to a senior growth partner at SGS.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-left text-xs text-slate-300 max-w-md mx-auto space-y-1.5">
-                    <div className="flex justify-between py-1 border-b border-slate-800">
-                      <span className="text-slate-400">Work Email:</span>
-                      <span className="font-mono text-white">{workEmail}</span>
+                  <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 text-left text-xs text-slate-700 max-w-md mx-auto space-y-2">
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-500">Work Email:</span>
+                      <span className="text-[#092B78] font-semibold">{workEmail}</span>
                     </div>
-                    <div className="flex justify-between py-1 border-b border-slate-800">
-                      <span className="text-slate-400">Selected Solution:</span>
-                      <span className="text-orange-400 capitalize font-medium">{selectedService}</span>
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-500">Selected Solution:</span>
+                      <span className="text-[#092B78] capitalize font-bold">{selectedService}</span>
                     </div>
-                    <div className="flex justify-between py-1 border-b border-slate-800">
-                      <span className="text-slate-400">Next Step:</span>
-                      <span className="text-emerald-400 font-medium">Initial Discovery Brief via Email</span>
+                    <div className="flex justify-between py-1">
+                      <span className="text-slate-500">Next Step:</span>
+                      <span className="text-[#FF4B16] font-bold">Initial Discovery Brief via Email</span>
                     </div>
                   </div>
 
                   <button
                     onClick={() => setIsSubmitted(false)}
-                    className="px-6 py-2.5 rounded-lg bg-slate-800 text-white text-xs font-semibold hover:bg-slate-700"
+                    className="px-7 py-3 rounded-full bg-[#092B78] text-white text-xs font-semibold hover:bg-[#071F5B] transition-colors shadow-lg"
                   >
                     Submit Another Inquiry
                   </button>
@@ -190,199 +239,155 @@ export const ContactView: React.FC<ContactViewProps> = ({
                 <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
                   
                   <div className="mb-4">
-                    <h3 className="text-xl font-bold text-white">Project Consultation Brief</h3>
-                    <p className="text-xs text-slate-400 mt-0.5">Fill in your requirements below for a prioritized response.</p>
+                    <h3 className="text-2xl font-bold text-[#092B78]">Project Consultation Brief</h3>
+                    <p className="text-xs text-slate-500 mt-0.5">Fill in your requirements below for a prioritized response within 24 hours.</p>
                   </div>
 
                   {/* Name & Company */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-slate-300 font-medium mb-1">
-                        Full Name <span className="text-orange-400">*</span>
+                      <label className="block text-[#092B78] font-bold mb-1">
+                        Full Name <span className="text-[#FF4B16]">*</span>
                       </label>
                       <input
                         type="text"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="e.g. Anand Kulkarni"
-                        className={`w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors ${
-                          errors.fullName ? 'border-rose-500' : 'border-slate-700'
+                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] border text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] transition-colors ${
+                          errors.fullName ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200/80'
                         }`}
                       />
-                      {errors.fullName && <p className="text-[11px] text-rose-400 mt-1">{errors.fullName}</p>}
+                      {errors.fullName && <p className="text-[11px] text-rose-500 mt-1">{errors.fullName}</p>}
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 font-medium mb-1">
-                        Company / Firm Name <span className="text-orange-400">*</span>
+                      <label className="block text-[#092B78] font-bold mb-1">
+                        Company / Firm Name <span className="text-[#FF4B16]">*</span>
                       </label>
                       <input
                         type="text"
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
                         placeholder="e.g. Kulkarni Architecture"
-                        className={`w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors ${
-                          errors.company ? 'border-rose-500' : 'border-slate-700'
+                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] border text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] transition-colors ${
+                          errors.company ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200/80'
                         }`}
                       />
-                      {errors.company && <p className="text-[11px] text-rose-400 mt-1">{errors.company}</p>}
+                      {errors.company && <p className="text-[11px] text-rose-500 mt-1">{errors.company}</p>}
                     </div>
                   </div>
 
                   {/* Email & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-slate-300 font-medium mb-1">
-                        Official Work Email <span className="text-orange-400">*</span>
+                      <label className="block text-[#092B78] font-bold mb-1">
+                        Official Work Email <span className="text-[#FF4B16]">*</span>
                       </label>
                       <input
                         type="email"
                         value={workEmail}
                         onChange={(e) => setWorkEmail(e.target.value)}
-                        placeholder="name@company.com"
-                        className={`w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors ${
-                          errors.workEmail ? 'border-rose-500' : 'border-slate-700'
+                        placeholder="anand@kulkarni.com"
+                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] border text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] transition-colors ${
+                          errors.workEmail ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200/80'
                         }`}
                       />
-                      {errors.workEmail && <p className="text-[11px] text-rose-400 mt-1">{errors.workEmail}</p>}
+                      {errors.workEmail && <p className="text-[11px] text-rose-500 mt-1">{errors.workEmail}</p>}
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 font-medium mb-1">
-                        Phone / WhatsApp <span className="text-orange-400">*</span>
+                      <label className="block text-[#092B78] font-bold mb-1">
+                        Contact Phone / WhatsApp <span className="text-[#FF4B16]">*</span>
                       </label>
                       <input
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+91 98765 43210"
-                        className={`w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors ${
-                          errors.phone ? 'border-rose-500' : 'border-slate-700'
+                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] border text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] transition-colors ${
+                          errors.phone ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200/80'
                         }`}
                       />
-                      {errors.phone && <p className="text-[11px] text-rose-400 mt-1">{errors.phone}</p>}
+                      {errors.phone && <p className="text-[11px] text-rose-500 mt-1">{errors.phone}</p>}
                     </div>
                   </div>
 
                   {/* Website & Service */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-slate-300 font-medium mb-1">
-                        Current Website URL (If Any)
-                      </label>
+                      <label className="block text-[#092B78] font-bold mb-1">Website URL (Optional)</label>
                       <input
                         type="url"
                         value={website}
                         onChange={(e) => setWebsite(e.target.value)}
                         placeholder="https://yourcompany.com"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] border border-slate-200/80 text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 font-medium mb-1">
-                        Primary Requirement / Growth Area
-                      </label>
+                      <label className="block text-[#092B78] font-bold mb-1">Primary Growth Requirement</label>
                       <select
                         value={selectedService}
                         onChange={(e) => setSelectedService(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-orange-500"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] border border-slate-200/80 text-[#092B78] focus:outline-none focus:border-[#FF4B16]"
                       >
-                        <option value="generate">GENERATE — Lead Generation & CRM Pipeline</option>
-                        <option value="launch">LAUNCH — Market Entry, Brand & Website</option>
-                        <option value="automate">AUTOMATE — Workflows, CRM & AI Efficiency</option>
-                        <option value="transform">TRANSFORM — Enterprise Digital Transformation</option>
-                        <option value="digital-growth">Digital Growth & Performance Advertising</option>
-                        <option value="technology">Technology Solutions & Custom Software</option>
-                        <option value="brand-creative">Brand Strategy & UI/UX Design</option>
-                        <option value="business-media">Business Media & Founder Authority</option>
-                        <option value="business-consulting">Strategic Business Consulting</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Budget & Timeline */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-slate-300 font-medium mb-1">
-                        Planned Investment Range
-                      </label>
-                      <select
-                        value={budgetRange}
-                        onChange={(e) => setBudgetRange(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-orange-500"
-                      >
-                        <option value="₹50k – ₹1L">₹50,000 – ₹1,00,000 (Initial Pilot)</option>
-                        <option value="₹1L – ₹3L">₹1,00,000 – ₹3,00,000 (Growth Sprint)</option>
-                        <option value="₹3L – ₹7L">₹3,00,000 – ₹7,00,000 (Comprehensive Operating Layer)</option>
-                        <option value="₹7L+">₹7,00,000+ (Multi-Quarter Scale)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-slate-300 font-medium mb-1">
-                        Target Timeline
-                      </label>
-                      <select
-                        value={projectTimeline}
-                        onChange={(e) => setProjectTimeline(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-orange-500"
-                      >
-                        <option value="Immediate (< 2 Weeks)">Immediate (Within 2 Weeks)</option>
-                        <option value="Within 30 Days">Within 30 Days</option>
-                        <option value="Within 60 Days">Within 60 Days</option>
-                        <option value="Exploratory / Next Quarter">Exploratory / Next Quarter</option>
+                        <option value="digital-growth">Digital Growth & Paid Ads</option>
+                        <option value="technology">Modern Web & Custom Software</option>
+                        <option value="brand-creative">Brand Authority & Design</option>
+                        <option value="business-media">Business Media & PR</option>
+                        <option value="business-consulting">Strategic Consulting</option>
+                        <option value="all-in-one">Complete Operating Stack</option>
                       </select>
                     </div>
                   </div>
 
                   {/* Message */}
                   <div>
-                    <label className="block text-slate-300 font-medium mb-1">
-                      Brief Message or Objectives
-                    </label>
+                    <label className="block text-[#092B78] font-bold mb-1">Project Objectives / Context</label>
                     <textarea
                       rows={3}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Describe your current commercial goals or operational bottlenecks..."
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
+                      placeholder="Briefly describe your current bottlenecks, target audience, or timeline..."
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] border border-slate-200/80 text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16]"
                     />
                   </div>
 
                   {/* Consent */}
-                  <div className="flex items-start gap-2 pt-1">
+                  <div className="flex items-start gap-2.5 pt-1">
                     <input
                       type="checkbox"
-                      id="contact-consent"
+                      id="consent-box"
                       checked={consent}
                       onChange={(e) => setConsent(e.target.checked)}
-                      className="mt-0.5 rounded border-slate-700 text-orange-500 focus:ring-orange-500 bg-slate-900"
+                      className="mt-0.5 rounded border-slate-300 text-[#FF4B16] focus:ring-[#FF4B16]"
                     />
-                    <label htmlFor="contact-consent" className="text-xs text-slate-400">
-                      I agree to receive commercial communications and proposal updates from Sanskar Growth Solutions.
+                    <label htmlFor="consent-box" className="text-[11px] text-slate-500 leading-snug">
+                      I agree to receive communications regarding this project inquiry from Sanskar Growth Solutions.
                     </label>
                   </div>
-                  {errors.consent && <p className="text-[11px] text-rose-400">{errors.consent}</p>}
+                  {errors.consent && <p className="text-[11px] text-rose-500">{errors.consent}</p>}
 
-                  {/* Submit */}
-                  <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
-                    <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
-                      <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                      <span>Enterprise privacy & NDA assured.</span>
-                    </div>
+                  {/* Submit Button */}
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[11px] text-slate-400 flex items-center gap-1">
+                      <ShieldCheck size={14} className="text-[#092B78]" />
+                      Confidential & NDA Protected
+                    </span>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-6 py-3 rounded-xl bg-[#F97316] hover:bg-orange-600 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-orange-500/20 active:scale-[0.98] transition-all disabled:opacity-50"
+                      className="px-7 py-3 rounded-full bg-[#FF4B16] hover:bg-[#E03E0E] text-white text-xs font-semibold flex items-center gap-2 shadow-lg shadow-[#FF4B16]/25 transition-all hover:-translate-y-0.5 active:scale-95 disabled:opacity-50"
                     >
                       {isSubmitting ? (
                         <span>Transmitting Brief...</span>
                       ) : (
                         <>
                           <span>Submit Consultation Brief</span>
-                          <Send className="w-3.5 h-3.5" />
+                          <ArrowRight size={14} />
                         </>
                       )}
                     </button>
