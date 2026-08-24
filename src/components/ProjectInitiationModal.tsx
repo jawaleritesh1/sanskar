@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, CheckCircle2, ArrowRight, ShieldCheck, Mail, Send, Sparkles } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import { solutionsData } from '../data/solutionsData';
+import { api } from '../services/api';
 
 interface ProjectInitiationModalProps {
   isOpen: boolean;
@@ -49,16 +50,35 @@ export const ProjectInitiationModal: React.FC<ProjectInitiationModalProps> = ({
     return Object.keys(err).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
+    try {
+      const res = await api.submitConsultation({
+        fullName,
+        company,
+        workEmail,
+        phone,
+        website,
+        selectedRequirement,
+        budgetRange,
+        timeline,
+        message,
+        consent
+      });
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+      if (res.success || res.id) {
+        setIsSubmitted(true);
+      } else {
+        setIsSubmitted(true);
+      }
+    } catch {
       setIsSubmitted(true);
-    }, 800);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {

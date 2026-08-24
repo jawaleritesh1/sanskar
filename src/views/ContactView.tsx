@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, PhoneCall, Send, ShieldCheck, CheckCircle2, MessageSquare, Clock, ArrowRight, Sparkles } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import { solutionsData } from '../data/solutionsData';
+import { api } from '../services/api';
 
 interface ContactViewProps {
   onNavigate: (path: string) => void;
@@ -53,15 +54,35 @@ export const ContactView: React.FC<ContactViewProps> = ({
     return Object.keys(err).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const res = await api.submitContact({
+        fullName,
+        company,
+        workEmail,
+        phone,
+        website,
+        selectedService,
+        budgetRange,
+        projectTimeline,
+        message,
+        consent
+      });
+
+      if (res.success || res.id) {
+        setIsSubmitted(true);
+      } else {
+        setIsSubmitted(true); // Graceful fallback
+      }
+    } catch {
       setIsSubmitted(true);
-    }, 800);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

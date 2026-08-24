@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import { industriesData } from '../data/industriesData';
+import { api } from '../services/api';
 
 interface FooterProps {
   onNavigate: (path: string) => void;
@@ -31,10 +32,15 @@ export const Footer: React.FC<FooterProps> = ({
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newsletterEmail || !newsletterEmail.includes('@')) return;
     setSubscribed(true);
+    try {
+      await api.subscribeNewsletter(newsletterEmail);
+    } catch (err) {
+      console.error('Newsletter subscription error:', err);
+    }
   };
 
   return (

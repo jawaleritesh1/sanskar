@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, RefreshCw, Layers, Zap, Target, Cpu, X, Sparkles } from 'lucide-react';
 import { GrowthStage } from '../types';
+import { api } from '../services/api';
 
 interface GrowthDiagnosticModalProps {
   isOpen: boolean;
@@ -68,6 +69,22 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
   };
 
   const rec = calculateRecommendation();
+
+  const handleGenerateDiagnostic = async () => {
+    setStep(3);
+    try {
+      await api.submitDiagnostic({
+        businessType,
+        primaryBottleneck,
+        currentRevenueStage,
+        recommendedStage: rec.stage,
+        recommendedTitle: rec.title,
+        recommendedSolution: rec.solution
+      });
+    } catch (e) {
+      console.error('Failed to submit diagnostic:', e);
+    }
+  };
 
   const handleCompleteAction = () => {
     if (onStartProjectWithDiagnostic) {
@@ -217,7 +234,7 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
                 ← Back
               </button>
               <button
-                onClick={() => setStep(3)}
+                onClick={handleGenerateDiagnostic}
                 className="px-6 py-2.5 rounded-full bg-[#FF4B16] text-white text-xs font-semibold hover:bg-[#E03E0E] flex items-center gap-2 shadow-md shadow-[#FF4B16]/20 transition-all hover:-translate-y-0.5 active:scale-95"
               >
                 <span>Generate Growth Architecture</span>

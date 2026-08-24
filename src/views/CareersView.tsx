@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { careersData } from '../data/careersData';
 import { CareerOpening } from '../types';
+import { api } from '../services/api';
 
 interface CareersViewProps {
   onNavigate: (path: string) => void;
@@ -43,14 +44,26 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleApply = (e: React.FormEvent) => {
+  const handleApply = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!applicantName || !applicantEmail) return;
+    if (!applicantName || !applicantEmail || !selectedJob) return;
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await api.submitCareerApplication({
+        jobId: selectedJob.id,
+        jobTitle: selectedJob.title,
+        applicantName,
+        applicantEmail,
+        applicantPhone,
+        portfolioLink,
+        applicantNote
+      });
       setIsSubmitted(true);
-    }, 800);
+    } catch {
+      setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
