@@ -67,20 +67,19 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="w-full bg-transparent text-[#092B78] pt-28 sm:pt-32 pb-24 font-sans selection:bg-[#FF4B16] selection:text-white overflow-x-hidden">
+    <div className="w-full bg-transparent text-white pt-28 sm:pt-32 pb-24 font-sans selection:bg-[#AFEB00] selection:text-[#141414] overflow-x-hidden">
       
       {/* Subtle Ambient Radial Lighting */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.6)_0%,rgba(247,249,255,0.25)_45%,rgba(234,240,255,0.5)_100%)]" />
         <motion.div
-          animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.45, 0.3] }}
+          animate={{ scale: [1, 1.08, 1], opacity: [0.2, 0.35, 0.2] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#C8D8FF] blur-[120px]"
+          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#2033FF]/25 blur-[120px]"
         />
         <motion.div
-          animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.16, 0.08] }}
+          animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-0 top-96 h-[500px] w-[500px] rounded-full bg-[#FF4B16] blur-[140px]"
+          className="absolute right-0 top-96 h-[500px] w-[500px] rounded-full bg-[#AFEB00]/20 blur-[140px]"
         />
       </div>
 
@@ -94,60 +93,55 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
           className="max-w-4xl mb-16"
         >
           <div className="flex items-center gap-3 mb-4">
-            <span className="h-[2px] w-8 bg-[#FF4B16]" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#092B78]">
+            <span className="h-[2px] w-8 bg-[#AFEB00]" />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#AFEB00] font-heading">
               Careers at Sanskar Growth Solutions
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-[#092B78] leading-[1.08]">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading tracking-[-0.03em] text-white leading-[1.08]">
             Build The Systems Powering{" "}
-            <span className="relative inline-block text-[#FF4B16]">
+            <span className="relative inline-block text-[#AFEB00]">
               High-Growth Businesses
-              <motion.span
-                animate={{ scaleX: [0, 1, 1] }}
-                transition={{ duration: 1.1, delay: 0.5 }}
-                className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-[#FF4B16]/30"
-              />
             </span>
           </h1>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
+          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
             We are looking for thoughtful engineers, growth strategists, and brand designers who value craftsmanship, commercial impact, and direct accountability.
           </p>
         </motion.div>
 
         {/* Culture & Values Bento */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          <div className="relative overflow-hidden p-8 rounded-3xl bg-white border border-slate-200/80 shadow-[0_15px_40px_rgba(9,43,120,0.04)] hover:border-[#092B78]/40 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#092B78] via-[#FF4B16] to-[#FFA07A] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <div className="w-10 h-10 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/15 flex items-center justify-center text-[#092B78] mb-4 font-bold text-xs">
+          <div className="relative overflow-hidden p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-[#AFEB00]/40 hover:bg-[#0E1A5A]/95 transition-all duration-300 group hover:-translate-y-1 text-white">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="w-10 h-10 rounded-2xl bg-[#070D2B] border border-white/10 flex items-center justify-center text-[#AFEB00] mb-4 font-bold text-xs font-heading">
               01
             </div>
-            <h3 className="text-xl font-bold text-[#092B78] mb-2">High Agency & Ownership</h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 className="text-xl font-bold font-heading text-white mb-2">High Agency &amp; Ownership</h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               We empower team members to make decisions, experiment with high-leverage growth strategies, and take direct pride in client business results.
             </p>
           </div>
 
-          <div className="relative overflow-hidden p-8 rounded-3xl bg-white border border-slate-200/80 shadow-[0_15px_40px_rgba(9,43,120,0.04)] hover:border-[#092B78]/40 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#092B78] via-[#FF4B16] to-[#FFA07A] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <div className="w-10 h-10 rounded-2xl bg-[#FFF8F6] border border-[#FF4B16]/20 flex items-center justify-center text-[#FF4B16] mb-4 font-bold text-xs">
+          <div className="relative overflow-hidden p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-[#AFEB00]/40 hover:bg-[#0E1A5A]/95 transition-all duration-300 group hover:-translate-y-1 text-white">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="w-10 h-10 rounded-2xl bg-[#070D2B] border border-white/10 flex items-center justify-center text-[#AFEB00] mb-4 font-bold text-xs font-heading">
               02
             </div>
-            <h3 className="text-xl font-bold text-[#092B78] mb-2">Craft Meets Commercial Impact</h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 className="text-xl font-bold font-heading text-white mb-2">Craft Meets Commercial Impact</h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               We obsess over code performance, typography, and mathematical design, but we always measure success by client revenue and operational velocity.
             </p>
           </div>
 
-          <div className="relative overflow-hidden p-8 rounded-3xl bg-white border border-slate-200/80 shadow-[0_15px_40px_rgba(9,43,120,0.04)] hover:border-[#092B78]/40 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#092B78] via-[#FF4B16] to-[#FFA07A] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <div className="w-10 h-10 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/15 flex items-center justify-center text-[#092B78] mb-4 font-bold text-xs">
+          <div className="relative overflow-hidden p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-[#AFEB00]/40 hover:bg-[#0E1A5A]/95 transition-all duration-300 group hover:-translate-y-1 text-white">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="w-10 h-10 rounded-2xl bg-[#070D2B] border border-white/10 flex items-center justify-center text-[#AFEB00] mb-4 font-bold text-xs font-heading">
               03
             </div>
-            <h3 className="text-xl font-bold text-[#092B78] mb-2">Continuous Technical Evolution</h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 className="text-xl font-bold font-heading text-white mb-2">Continuous Technical Evolution</h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               We stay at the frontier of modern web engineering, TypeScript, automated CRM pipelines, and practical AI workflow tools.
             </p>
           </div>
@@ -155,11 +149,11 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
 
         {/* Open Positions List */}
         <div className="mb-20">
-          <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-200/80">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#092B78]">
+          <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
+            <h2 className="text-2xl sm:text-3xl font-bold font-heading text-white">
               Open Positions
             </h2>
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#EEF3FF] text-[#092B78] border border-[#092B78]/10">
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#070D2B] text-[#AFEB00] border border-white/10 font-heading">
               {careersData.length} Roles Active in Pune / Hybrid
             </span>
           </div>
@@ -169,31 +163,31 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
               <div
                 key={job.id}
                 id={`job-card-${job.id}`}
-                className="relative overflow-hidden p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/80 hover:border-[#092B78]/40 hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_15px_40px_rgba(9,43,120,0.04)] hover:-translate-y-0.5 group"
+                className="relative overflow-hidden p-7 sm:p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 hover:border-[#AFEB00]/40 hover:bg-[#0E1A5A]/95 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 group text-white"
               >
                 {/* Top Hover Gradient Line */}
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#092B78] via-[#FF4B16] to-[#FFA07A] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="space-y-2.5">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-bold uppercase px-3 py-1 rounded-full bg-[#EEF3FF] text-[#092B78] border border-[#092B78]/10">
+                    <span className="text-xs font-bold uppercase px-3 py-1 rounded-full bg-[#070D2B] text-[#AFEB00] border border-white/10 font-heading">
                       {job.department}
                     </span>
-                    <span className="text-xs text-slate-500 font-semibold flex items-center gap-1">
+                    <span className="text-xs text-slate-400 font-semibold flex items-center gap-1">
                       <MapPin size={13} className="text-slate-400" />
                       {job.location}
                     </span>
-                    <span className="text-xs text-slate-500 font-semibold flex items-center gap-1">
+                    <span className="text-xs text-slate-400 font-semibold flex items-center gap-1">
                       <Clock size={13} className="text-slate-400" />
                       {job.type} ({job.experience})
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-[#092B78] group-hover:text-[#FF4B16] transition-colors">
+                  <h3 className="text-2xl font-bold font-heading text-white group-hover:text-[#AFEB00] transition-colors">
                     {job.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
                     {job.description}
                   </p>
                 </div>
@@ -204,10 +198,10 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
                     setSelectedJob(job);
                     setIsSubmitted(false);
                   }}
-                  className="px-7 py-3.5 rounded-full bg-[#092B78] hover:bg-[#071F5B] text-white text-xs sm:text-sm font-semibold transition-all duration-300 shadow-lg shadow-[#092B78]/20 shrink-0 flex items-center gap-2 self-start md:self-auto group/btn hover:shadow-xl"
+                  className="px-7 py-3.5 rounded-full bg-[#AFEB00] hover:bg-[#9CD600] text-[#141414] text-xs sm:text-sm font-bold font-heading transition-all duration-300 shadow-lg shadow-[#AFEB00]/25 shrink-0 flex items-center gap-2 self-start md:self-auto group/btn hover:shadow-xl"
                 >
-                  <span>View Role & Apply</span>
-                  <ArrowRight size={15} className="text-[#FF4B16] transition-transform duration-300 group-hover/btn:translate-x-1" />
+                  <span>View Role &amp; Apply</span>
+                  <ArrowRight size={15} className="text-[#141414] transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </button>
               </div>
             ))}
@@ -215,14 +209,14 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
         </div>
 
         {/* General Application Inquiries */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200/80 text-center max-w-2xl mx-auto space-y-3 shadow-md">
-          <h3 className="text-xl font-bold text-[#092B78]">Don't see your exact role?</h3>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+        <div className="p-8 sm:p-10 rounded-3xl bg-[#0B1446]/80 border border-white/10 text-center max-w-2xl mx-auto space-y-3 shadow-md text-white">
+          <h3 className="text-xl font-bold font-heading text-white">Don't see your exact role?</h3>
+          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
             We are always interested in connecting with outstanding growth strategists, full-stack developers, and designers.
           </p>
           <a
             href="mailto:careers@sanskargrowthsolutions.com"
-            className="inline-flex items-center gap-1 text-xs font-bold text-[#FF4B16] hover:text-[#E03E0E] pt-1"
+            className="inline-flex items-center gap-1 text-xs font-bold font-heading text-[#AFEB00] hover:underline pt-1"
           >
             <span>Send your portfolio to careers@sanskargrowthsolutions.com</span>
             <ArrowRight size={13} />
@@ -233,16 +227,16 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
 
       {/* Job Detail & Application Modal */}
       {selectedJob && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#051336]/75 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="relative w-full max-w-2xl bg-white border border-slate-200/80 rounded-3xl p-7 sm:p-10 text-[#092B78] shadow-2xl max-h-[92vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#080E32]/85 backdrop-blur-xl animate-in fade-in duration-150">
+          <div className="relative w-full max-w-2xl bg-[#0B1446] border border-white/15 rounded-3xl p-7 sm:p-10 text-white shadow-2xl max-h-[92vh] overflow-y-auto">
             
             {/* Top Accent Line */}
-            <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#071F5B] via-[#2563EB] to-[#071F5B] rounded-t-3xl" />
+            <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] rounded-t-3xl" />
 
             {/* Close */}
             <button
               onClick={() => setSelectedJob(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-[#EEF3FF] text-[#092B78] hover:text-[#FF4B16] hover:bg-[#C8D8FF]/50 transition-colors"
+              className="absolute top-6 right-6 p-2 rounded-full bg-white/5 text-slate-300 hover:text-white hover:bg-white/15 transition-colors border border-white/10"
               aria-label="Close job application modal"
             >
               <X size={18} />
@@ -250,17 +244,17 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
 
             {isSubmitted ? (
               <div className="py-8 text-center space-y-4 animate-in fade-in">
-                <div className="w-14 h-14 rounded-2xl bg-[#EEF3FF] border border-[#092B78]/20 flex items-center justify-center mx-auto text-[#092B78]">
-                  <CheckCircle2 size={32} className="text-[#FF4B16]" />
+                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-[#AFEB00]">
+                  <CheckCircle2 size={32} className="text-[#AFEB00]" />
                 </div>
-                <h3 className="text-2xl font-bold text-[#092B78]">Application Received</h3>
-                <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                  Thank you, <strong className="text-[#092B78]">{applicantName}</strong>. Your profile for <strong className="text-[#092B78]">{selectedJob.title}</strong> has been submitted to the SGS talent team.
+                <h3 className="text-2xl font-bold font-heading text-white">Application Received</h3>
+                <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+                  Thank you, <strong className="text-[#AFEB00] font-heading">{applicantName}</strong>. Your profile for <strong className="text-white font-heading">{selectedJob.title}</strong> has been submitted to the SGS talent team.
                 </p>
                 <div className="pt-4">
                   <button
                     onClick={() => setSelectedJob(null)}
-                    className="px-7 py-3 bg-[#092B78] text-xs font-semibold rounded-full text-white hover:bg-[#071F5B] transition-colors shadow-lg"
+                    className="px-7 py-3 bg-[#AFEB00] text-xs font-bold font-heading rounded-full text-[#141414] hover:bg-[#9CD600] transition-colors shadow-lg"
                   >
                     Close Window
                   </button>
@@ -269,24 +263,24 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
             ) : (
               <div>
                 <div className="mb-6 pt-2">
-                  <span className="text-xs font-bold uppercase px-3 py-1 rounded-full bg-[#EEF3FF] text-[#092B78] border border-[#092B78]/10">
+                  <span className="text-xs font-bold uppercase px-3 py-1 rounded-full bg-[#070D2B] text-[#AFEB00] border border-white/10 font-heading">
                     {selectedJob.department} • {selectedJob.type}
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#092B78] mt-2">
+                  <h2 className="text-2xl sm:text-3xl font-bold font-heading text-white mt-2">
                     {selectedJob.title}
                   </h2>
-                  <p className="text-xs text-slate-500 mt-1 font-semibold">
+                  <p className="text-xs text-slate-400 mt-1 font-semibold">
                     Location: {selectedJob.location} • Experience: {selectedJob.experience}
                   </p>
                 </div>
 
-                <div className="space-y-6 text-xs sm:text-sm text-slate-700 mb-8">
+                <div className="space-y-6 text-xs sm:text-sm text-slate-300 mb-8">
                   <div>
-                    <h4 className="font-bold text-[#092B78] uppercase text-xs tracking-wider mb-2.5">Key Responsibilities</h4>
+                    <h4 className="font-bold font-heading text-white uppercase text-xs tracking-wider mb-2.5">Key Responsibilities</h4>
                     <ul className="space-y-2">
                       {selectedJob.responsibilities.map((r, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4B16] mt-1.5 shrink-0"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#AFEB00] mt-1.5 shrink-0"></span>
                           <span>{r}</span>
                         </li>
                       ))}
@@ -294,11 +288,11 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
                   </div>
 
                   <div>
-                    <h4 className="font-bold text-[#092B78] uppercase text-xs tracking-wider mb-2.5">Requirements & Qualifications</h4>
+                    <h4 className="font-bold font-heading text-white uppercase text-xs tracking-wider mb-2.5">Requirements &amp; Qualifications</h4>
                     <ul className="space-y-2">
                       {selectedJob.requirements.map((req, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#092B78] mt-1.5 shrink-0"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#2033FF] mt-1.5 shrink-0"></span>
                           <span>{req}</span>
                         </li>
                       ))}
@@ -307,8 +301,8 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
                 </div>
 
                 {/* Application Form */}
-                <form onSubmit={handleApply} className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 space-y-3">
-                  <h4 className="text-xs font-bold uppercase text-[#092B78] tracking-wider">Quick Application</h4>
+                <form onSubmit={handleApply} className="p-6 rounded-2xl bg-[#070D2B] border border-white/10 space-y-3">
+                  <h4 className="text-xs font-bold font-heading uppercase text-white tracking-wider">Quick Application</h4>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
@@ -317,7 +311,7 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
                       value={applicantName}
                       onChange={(e) => setApplicantName(e.target.value)}
                       placeholder="Your Full Name *"
-                      className="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-200/80 rounded-xl text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] focus:ring-1 focus:ring-[#FF4B16]"
+                      className="w-full px-3.5 py-2.5 text-xs bg-[#060B24] border border-white/15 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#AFEB00] focus:ring-1 focus:ring-[#AFEB00]"
                     />
                     <input
                       type="email"
@@ -325,7 +319,7 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
                       value={applicantEmail}
                       onChange={(e) => setApplicantEmail(e.target.value)}
                       placeholder="Your Email *"
-                      className="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-200/80 rounded-xl text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] focus:ring-1 focus:ring-[#FF4B16]"
+                      className="w-full px-3.5 py-2.5 text-xs bg-[#060B24] border border-white/15 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#AFEB00] focus:ring-1 focus:ring-[#AFEB00]"
                     />
                   </div>
 
@@ -335,14 +329,14 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
                       value={applicantPhone}
                       onChange={(e) => setApplicantPhone(e.target.value)}
                       placeholder="Contact Phone / WhatsApp"
-                      className="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-200/80 rounded-xl text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] focus:ring-1 focus:ring-[#FF4B16]"
+                      className="w-full px-3.5 py-2.5 text-xs bg-[#060B24] border border-white/15 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#AFEB00] focus:ring-1 focus:ring-[#AFEB00]"
                     />
                     <input
                       type="url"
                       value={portfolioLink}
                       onChange={(e) => setPortfolioLink(e.target.value)}
                       placeholder="LinkedIn / GitHub / Portfolio URL"
-                      className="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-200/80 rounded-xl text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] focus:ring-1 focus:ring-[#FF4B16]"
+                      className="w-full px-3.5 py-2.5 text-xs bg-[#060B24] border border-white/15 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#AFEB00] focus:ring-1 focus:ring-[#AFEB00]"
                     />
                   </div>
 
@@ -351,13 +345,13 @@ export const CareersView: React.FC<CareersViewProps> = ({ onNavigate }) => {
                     value={applicantNote}
                     onChange={(e) => setApplicantNote(e.target.value)}
                     placeholder="Brief note on your recent relevant work..."
-                    className="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-200/80 rounded-xl text-[#092B78] placeholder-slate-400 focus:outline-none focus:border-[#FF4B16] focus:ring-1 focus:ring-[#FF4B16]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#060B24] border border-white/15 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#AFEB00] focus:ring-1 focus:ring-[#AFEB00]"
                   />
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 bg-[#FF4B16] hover:bg-[#E03E0E] text-white text-xs font-semibold rounded-full flex items-center justify-center gap-2 transition-all shadow-md shadow-[#FF4B16]/25 disabled:opacity-50 active:scale-95"
+                    className="w-full py-3 bg-[#AFEB00] hover:bg-[#9CD600] text-[#141414] text-xs font-bold font-heading rounded-full flex items-center justify-center gap-2 transition-all shadow-md shadow-[#AFEB00]/25 disabled:opacity-50 active:scale-95"
                   >
                     {isSubmitting ? 'Submitting Application...' : 'Submit Application'}
                     <Send size={14} />

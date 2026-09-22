@@ -44,12 +44,12 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer id="corporate-footer" className="relative overflow-hidden bg-[#051336] text-white font-sans border-t border-slate-800/80">
+    <footer id="corporate-footer" className="relative overflow-hidden bg-[#070D2B] text-white font-sans border-t border-white/10">
       {/* Ambient Radial Lighting & Gradient Glows matching Homepage theme */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-32 left-1/4 h-[400px] w-[500px] rounded-full bg-[#092B78]/40 blur-[130px]" />
-        <div className="absolute -bottom-32 right-10 h-[450px] w-[450px] rounded-full bg-[#FF4B16]/10 blur-[140px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(9,43,120,0.25)_0%,transparent_75%)]" />
+        <div className="absolute -top-32 left-1/4 h-[400px] w-[500px] rounded-full bg-[#2033FF]/15 blur-[130px]" />
+        <div className="absolute -bottom-32 right-10 h-[450px] w-[450px] rounded-full bg-[#AFEB00]/10 blur-[140px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(32,51,255,0.15)_0%,transparent_75%)]" />
       </div>
 
       {/* Main Footer Content */}
@@ -61,18 +61,18 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 1: Brand & Identity (Span 4) */}
           <div className="space-y-6 lg:col-span-4 pr-0 lg:pr-2">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center rounded-2xl bg-white/95 p-2.5 shadow-xl shadow-[#092B78]/30 backdrop-blur-md">
+              <div className="flex items-center justify-center rounded-2xl bg-white/95 p-2 shadow-xl shadow-black/40 backdrop-blur-md">
                 <img
                   src="/assets/logo/logo.png"
                   alt="Sanskar Growth Solutions"
-                  className="h-8 w-auto object-contain"
+                  className="h-7 w-auto object-contain"
                 />
               </div>
               <div>
-                <span className="text-base font-bold tracking-tight text-white block leading-tight">
+                <span className="text-base font-bold tracking-tight text-white block leading-tight font-heading">
                   Sanskar Growth Solutions
                 </span>
-                <span className="text-[11px] font-semibold uppercase tracking-widest text-[#FF4B16]">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#AFEB00]">
                   Strategy • Tech • Growth
                 </span>
               </div>
@@ -83,10 +83,10 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             {/* Live Status Indicator */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 px-3.5 py-1.5 text-xs font-medium text-emerald-400 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#AFEB00]/30 bg-[#AFEB00]/10 px-3.5 py-1.5 text-xs font-medium text-[#AFEB00] backdrop-blur-md">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#AFEB00] opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#AFEB00]"></span>
               </span>
               <span>All Systems Operational • Pune, India</span>
             </div>
@@ -98,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-[#FF4B16] hover:bg-[#FF4B16] hover:text-white hover:-translate-y-1"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-[#AFEB00] hover:bg-[#AFEB00] hover:text-[#141414] hover:-translate-y-1"
               >
                 <Linkedin size={16} />
               </a>
@@ -107,7 +107,7 @@ export const Footer: React.FC<FooterProps> = ({
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-[#FF4B16] hover:bg-[#FF4B16] hover:text-white hover:-translate-y-1"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-[#AFEB00] hover:bg-[#AFEB00] hover:text-[#141414] hover:-translate-y-1"
               >
                 <Instagram size={16} />
               </a>
@@ -116,14 +116,14 @@ export const Footer: React.FC<FooterProps> = ({
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Twitter / X"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-[#FF4B16] hover:bg-[#FF4B16] hover:text-white hover:-translate-y-1"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-[#AFEB00] hover:bg-[#AFEB00] hover:text-[#141414] hover:-translate-y-1"
               >
                 <Twitter size={16} />
               </a>
               <a
                 href="mailto:hello@sanskargrowthsolutions.com"
                 aria-label="Email"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-[#FF4B16] hover:bg-[#FF4B16] hover:text-white hover:-translate-y-1"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-[#AFEB00] hover:bg-[#AFEB00] hover:text-[#141414] hover:-translate-y-1"
               >
                 <Mail size={16} />
               </a>
@@ -133,8 +133,8 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 2: Solutions / Capabilities (Span 2) */}
           <div className="space-y-4 lg:col-span-2 xl:col-span-2">
             <div className="flex items-center gap-2">
-              <span className="h-[2px] w-4 bg-[#FF4B16]" />
-              <h5 className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF4B16]">
+              <span className="h-[2px] w-4 bg-[#AFEB00]" />
+              <h5 className="text-xs font-bold uppercase tracking-[0.2em] text-[#AFEB00]">
                 Growth Capabilities
               </h5>
             </div>
@@ -145,7 +145,7 @@ export const Footer: React.FC<FooterProps> = ({
                     onClick={() => onNavigate(`/solutions/${s.slug}`)}
                     className="group flex items-start gap-2 text-slate-300 transition-all duration-200 hover:text-white hover:translate-x-1 text-left w-full"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-500 transition-all duration-200 group-hover:w-2.5 group-hover:bg-[#FF4B16]" />
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-500 transition-all duration-200 group-hover:w-2.5 group-hover:bg-[#AFEB00]" />
                     <span className="leading-snug text-xs sm:text-[13px]">{s.title}</span>
                   </button>
                 </li>
@@ -156,8 +156,8 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 3: Industries We Serve (Span 3) */}
           <div className="space-y-4 lg:col-span-3 xl:col-span-3">
             <div className="flex items-center gap-2">
-              <span className="h-[2px] w-4 bg-[#FF4B16]" />
-              <h5 className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF4B16]">
+              <span className="h-[2px] w-4 bg-[#AFEB00]" />
+              <h5 className="text-xs font-bold uppercase tracking-[0.2em] text-[#AFEB00]">
                 Industries
               </h5>
             </div>
@@ -168,7 +168,7 @@ export const Footer: React.FC<FooterProps> = ({
                     onClick={() => onNavigate(`/industries/${ind.slug}`)}
                     className="group flex items-start gap-2.5 text-slate-300 transition-all duration-200 hover:text-white hover:translate-x-1 text-left w-full"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-500 transition-all duration-200 group-hover:w-2.5 group-hover:bg-[#FF4B16]" />
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-500 transition-all duration-200 group-hover:w-2.5 group-hover:bg-[#AFEB00]" />
                     <span className="leading-snug text-xs sm:text-[13px]">{ind.title}</span>
                   </button>
                 </li>
@@ -179,8 +179,8 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 4: Stay Informed / Newsletter (Span 3) */}
           <div className="space-y-4 lg:col-span-3 xl:col-span-3">
             <div className="flex items-center gap-2">
-              <span className="h-[2px] w-4 bg-[#FF4B16]" />
-              <h5 className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF4B16]">
+              <span className="h-[2px] w-4 bg-[#AFEB00]" />
+              <h5 className="text-xs font-bold uppercase tracking-[0.2em] text-[#AFEB00]">
                 Stay Ahead
               </h5>
             </div>
@@ -189,13 +189,13 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             {subscribed ? (
-              <div className="flex items-center gap-2.5 rounded-2xl border border-[#FF4B16]/40 bg-[#FF4B16]/10 p-3.5 text-xs font-medium text-white backdrop-blur-md">
-                <CheckCircle2 size={16} className="text-[#FF4B16] shrink-0" />
+              <div className="flex items-center gap-2.5 rounded-2xl border border-[#AFEB00]/40 bg-[#AFEB00]/10 p-3.5 text-xs font-medium text-white backdrop-blur-md">
+                <CheckCircle2 size={16} className="text-[#AFEB00] shrink-0" />
                 <span>Subscribed! Welcome to SGS Insights.</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="space-y-2">
-                <div className="relative flex items-center rounded-full border border-white/20 bg-white/5 p-1.5 backdrop-blur-md transition-all duration-300 focus-within:border-[#FF4B16] focus-within:bg-white/10">
+                <div className="relative flex items-center rounded-full border border-white/20 bg-white/5 p-1.5 backdrop-blur-md transition-all duration-300 focus-within:border-[#AFEB00] focus-within:bg-white/10">
                   <input
                     type="email"
                     value={newsletterEmail}
@@ -206,10 +206,10 @@ export const Footer: React.FC<FooterProps> = ({
                   />
                   <button
                     type="submit"
-                    className="flex shrink-0 items-center gap-1 rounded-full bg-[#FF4B16] px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-[#FF4B16]/25 transition-all duration-300 hover:bg-[#E03E0E] hover:scale-105 active:scale-95"
+                    className="flex shrink-0 items-center gap-1 rounded-full bg-[#AFEB00] px-4 py-2 text-xs font-bold text-[#141414] shadow-lg shadow-[#AFEB00]/25 transition-all duration-300 hover:bg-[#9CD600] hover:scale-105 active:scale-95"
                   >
                     <span>Join</span>
-                    <ArrowRight size={13} />
+                    <ArrowRight size={13} className="text-[#141414]" />
                   </button>
                 </div>
               </form>
@@ -220,31 +220,31 @@ export const Footer: React.FC<FooterProps> = ({
               <div className="flex flex-wrap gap-2 text-xs text-slate-400">
                 <button
                   onClick={() => onNavigate('/about')}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-white/25 hover:text-white"
+                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-[#AFEB00]/40 hover:text-white"
                 >
                   About
                 </button>
                 <button
                   onClick={() => onNavigate('/insights')}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-white/25 hover:text-white"
+                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-[#AFEB00]/40 hover:text-white"
                 >
                   Insights
                 </button>
                 <button
                   onClick={() => onNavigate('/work')}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-white/25 hover:text-white"
+                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-[#AFEB00]/40 hover:text-white"
                 >
                   Work
                 </button>
                 <button
                   onClick={() => onNavigate('/careers')}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-white/25 hover:text-white"
+                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-[#AFEB00]/40 hover:text-white"
                 >
                   Careers
                 </button>
                 <button
                   onClick={() => onNavigate('/contact')}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-white/25 hover:text-white"
+                  className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 transition-colors hover:border-[#AFEB00]/40 hover:text-white"
                 >
                   Contact
                 </button>
@@ -262,14 +262,21 @@ export const Footer: React.FC<FooterProps> = ({
 
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-slate-300">
-              <ShieldCheck size={14} className="text-[#FF4B16]" />
+              <ShieldCheck size={14} className="text-[#AFEB00]" />
               Enterprise-Grade Growth Systems
             </span>
             <button
-              onClick={() => onNavigate('/contact')}
-              className="text-slate-400 hover:text-white transition-colors"
+              onClick={() => onNavigate('/legal/privacy')}
+              className="text-slate-400 hover:text-[#AFEB00] transition-colors"
             >
-              Privacy & Terms
+              Privacy Policy
+            </button>
+            <span className="text-slate-600">•</span>
+            <button
+              onClick={() => onNavigate('/legal/terms')}
+              className="text-slate-400 hover:text-[#AFEB00] transition-colors"
+            >
+              Terms of Service
             </button>
           </div>
         </div>

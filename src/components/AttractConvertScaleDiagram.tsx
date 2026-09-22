@@ -30,8 +30,8 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
         'B2B & B2C Inbound Lead Engines'
       ],
       outcome: 'Predictable qualified inbound pipeline and high-reputation market visibility.',
-      color: '#F59E0B',
-      badgeBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+      color: '#AFEB00',
+      badgeBg: 'bg-[#AFEB00]/15 text-[#AFEB00] border-[#AFEB00]/30'
     },
     convert: {
       number: '02',
@@ -48,8 +48,8 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
         'Instant Two-Way CRM Lead Sync'
       ],
       outcome: 'Higher inquiry-to-client conversion velocity and zero lost leads.',
-      color: '#F59E0B',
-      badgeBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+      color: '#AFEB00',
+      badgeBg: 'bg-[#AFEB00]/15 text-[#AFEB00] border-[#AFEB00]/30'
     },
     scale: {
       number: '03',
@@ -66,19 +66,20 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
         'Executive Real-Time Performance Analytics'
       ],
       outcome: 'Operational leverage, reduced overhead, and scalable unit economics.',
-      color: '#F59E0B',
-      badgeBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+      color: '#AFEB00',
+      badgeBg: 'bg-[#AFEB00]/15 text-[#AFEB00] border-[#AFEB00]/30'
     }
   };
 
   const current = stagesInfo[activeStage];
 
   return (
-    <section id="growth-framework" className="relative py-24 bg-[#08090D] text-white overflow-hidden border-t border-white/[0.06]">
+    <section id="growth-framework" className="relative py-24 bg-[#0F1B64] text-white overflow-hidden border-t border-white/[0.08]">
       
-      {/* Background Decorative Strativ Glow */}
+      {/* Background Decorative Electric Blue & Lime Glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-amber-500/10 rounded-full blur-[130px]"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-[#2033FF]/25 rounded-full blur-[130px]"></div>
+        <div className="absolute bottom-0 right-10 w-[350px] h-[350px] bg-[#AFEB00]/10 rounded-full blur-[140px]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -91,19 +92,19 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-amber-400 text-xs font-mono font-semibold uppercase tracking-wider mb-4 shadow-sm">
-            <Layers className="w-3.5 h-3.5 text-amber-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] border border-[#AFEB00]/30 text-[#AFEB00] text-xs font-mono font-semibold uppercase tracking-wider mb-4 shadow-sm">
+            <Layers className="w-3.5 h-3.5 text-[#AFEB00]" />
             The Signature SGS Framework
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white font-heading">
-            ATTRACT → CONVERT → SCALE
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-heading">
+            Attract. Convert. <span className="bg-[#AFEB00] text-[#141414] px-2.5 py-0.5 rounded-xl inline-block">Scale.</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-400 font-sans leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-slate-300 font-sans leading-relaxed">
             Your business doesn't need more disconnected services. We combine marketing, technology, branding, and automation into one synchronized operating layer.
           </p>
         </motion.div>
 
-        {/* Strativ 3-Stage Bento Cards with Stagger Animation */}
+        {/* 3-Stage Bento Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           
           {/* Stage 1: Attract */}
@@ -118,15 +119,15 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
             }}
             className={`cursor-pointer rounded-3xl p-7 transition-all duration-300 border relative ${
               activeStage === 'attract'
-                ? 'bg-[#121626]/90 border-amber-500/80 shadow-2xl shadow-amber-500/15 ring-1 ring-amber-500/30 -translate-y-1'
-                : 'bg-[#0F121C]/70 border-white/[0.08] hover:bg-[#141828]/80 hover:border-white/20'
+                ? 'bg-[#0A1245] border-[#AFEB00] shadow-2xl shadow-[#AFEB00]/20 ring-1 ring-[#AFEB00]/40 -translate-y-1'
+                : 'bg-white/5 border-white/[0.08] hover:bg-white/10 hover:border-white/20'
             }`}
           >
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono font-bold text-amber-400 tracking-widest uppercase">
+              <span className="text-xs font-mono font-bold text-[#AFEB00] tracking-widest uppercase">
                 Stage 01
               </span>
-              <span className={`w-8 h-8 rounded-xl flex items-center justify-center ${activeStage === 'attract' ? 'bg-amber-500 text-black font-bold' : 'bg-white/5 text-amber-400'}`}>
+              <span className={`w-8 h-8 rounded-xl flex items-center justify-center ${activeStage === 'attract' ? 'bg-[#AFEB00] text-[#141414] font-bold' : 'bg-white/5 text-[#AFEB00]'}`}>
                 <Target className="w-4 h-4" />
               </span>
             </div>
@@ -134,10 +135,10 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
             <p className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wide mb-3">
               Marketing + Brand
             </p>
-            <p className="text-xs sm:text-sm text-slate-300 line-clamp-2">
+            <p className="text-xs sm:text-sm text-slate-300 line-clamp-2 font-sans">
               Build visibility, market authority, and qualified demand.
             </p>
-            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-amber-400">
+            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-[#AFEB00]">
               <span>View Capabilities</span>
               <ArrowRight className={`w-3.5 h-3.5 transition-transform ${activeStage === 'attract' ? 'translate-x-1' : ''}`} />
             </div>
@@ -155,15 +156,15 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
             }}
             className={`cursor-pointer rounded-3xl p-7 transition-all duration-300 border relative ${
               activeStage === 'convert'
-                ? 'bg-[#121626]/90 border-amber-500/80 shadow-2xl shadow-amber-500/15 ring-1 ring-amber-500/30 -translate-y-1'
-                : 'bg-[#0F121C]/70 border-white/[0.08] hover:bg-[#141828]/80 hover:border-white/20'
+                ? 'bg-[#0A1245] border-[#AFEB00] shadow-2xl shadow-[#AFEB00]/20 ring-1 ring-[#AFEB00]/40 -translate-y-1'
+                : 'bg-white/5 border-white/[0.08] hover:bg-white/10 hover:border-white/20'
             }`}
           >
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono font-bold text-amber-400 tracking-widest uppercase">
+              <span className="text-xs font-mono font-bold text-[#AFEB00] tracking-widest uppercase">
                 Stage 02
               </span>
-              <span className={`w-8 h-8 rounded-xl flex items-center justify-center ${activeStage === 'convert' ? 'bg-amber-500 text-black font-bold' : 'bg-white/5 text-amber-400'}`}>
+              <span className={`w-8 h-8 rounded-xl flex items-center justify-center ${activeStage === 'convert' ? 'bg-[#AFEB00] text-[#141414] font-bold' : 'bg-white/5 text-[#AFEB00]'}`}>
                 <Zap className="w-4 h-4" />
               </span>
             </div>
@@ -171,10 +172,10 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
             <p className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wide mb-3">
               Digital Experience
             </p>
-            <p className="text-xs sm:text-sm text-slate-300 line-clamp-2">
+            <p className="text-xs sm:text-sm text-slate-300 line-clamp-2 font-sans">
               Turn high-intent attention and traffic into sales opportunities.
             </p>
-            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-amber-400">
+            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-[#AFEB00]">
               <span>View Capabilities</span>
               <ArrowRight className={`w-3.5 h-3.5 transition-transform ${activeStage === 'convert' ? 'translate-x-1' : ''}`} />
             </div>
@@ -192,15 +193,15 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
             }}
             className={`cursor-pointer rounded-3xl p-7 transition-all duration-300 border relative ${
               activeStage === 'scale'
-                ? 'bg-[#121626]/90 border-amber-500/80 shadow-2xl shadow-amber-500/15 ring-1 ring-amber-500/30 -translate-y-1'
-                : 'bg-[#0F121C]/70 border-white/[0.08] hover:bg-[#141828]/80 hover:border-white/20'
+                ? 'bg-[#0A1245] border-[#AFEB00] shadow-2xl shadow-[#AFEB00]/20 ring-1 ring-[#AFEB00]/40 -translate-y-1'
+                : 'bg-white/5 border-white/[0.08] hover:bg-white/10 hover:border-white/20'
             }`}
           >
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono font-bold text-amber-400 tracking-widest uppercase">
+              <span className="text-xs font-mono font-bold text-[#AFEB00] tracking-widest uppercase">
                 Stage 03
               </span>
-              <span className={`w-8 h-8 rounded-xl flex items-center justify-center ${activeStage === 'scale' ? 'bg-amber-500 text-black font-bold' : 'bg-white/5 text-amber-400'}`}>
+              <span className={`w-8 h-8 rounded-xl flex items-center justify-center ${activeStage === 'scale' ? 'bg-[#AFEB00] text-[#141414] font-bold' : 'bg-white/5 text-[#AFEB00]'}`}>
                 <Cpu className="w-4 h-4" />
               </span>
             </div>
@@ -208,10 +209,10 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
             <p className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wide mb-3">
               Technology + Automation
             </p>
-            <p className="text-xs sm:text-sm text-slate-300 line-clamp-2">
+            <p className="text-xs sm:text-sm text-slate-300 line-clamp-2 font-sans">
               Build resilient systems for sustainable, automated operations.
             </p>
-            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-amber-400">
+            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-[#AFEB00]">
               <span>View Capabilities</span>
               <ArrowRight className={`w-3.5 h-3.5 transition-transform ${activeStage === 'scale' ? 'translate-x-1' : ''}`} />
             </div>
@@ -219,20 +220,20 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
 
         </div>
 
-        {/* Selected Stage Deep-Dive Card (Strativ Bento Box with Spring Transition) */}
+        {/* Selected Stage Deep-Dive Card */}
         <motion.div
           layout
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.5 }}
-          className="bg-[#0F121C]/90 border border-white/[0.08] rounded-3xl p-7 sm:p-10 shadow-2xl backdrop-blur-xl"
+          className="bg-[#0A1245]/90 border border-white/[0.1] rounded-3xl p-7 sm:p-10 shadow-2xl backdrop-blur-xl"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Left: Stage Overview & Strategy */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#AFEB00]/15 text-[#AFEB00] border border-[#AFEB00]/30">
                 {current.number} • {current.category}
               </div>
               
@@ -240,48 +241,48 @@ export const AttractConvertScaleDiagram: React.FC<AttractConvertScaleDiagramProp
                 {current.tagline}
               </h3>
               
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-sans">
                 {current.description}
               </p>
 
-              <div className="pt-4 border-t border-white/[0.06]">
-                <div className="text-[10px] uppercase font-mono font-bold text-amber-400 tracking-wider mb-2">
+              <div className="pt-4 border-t border-white/[0.08]">
+                <div className="text-[10px] uppercase font-mono font-bold text-[#AFEB00] tracking-wider mb-2">
                   Primary Commercial Outcome
                 </div>
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.06] text-xs sm:text-sm text-slate-200 flex items-start gap-3">
-                  <RefreshCw className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08] text-xs sm:text-sm text-slate-200 flex items-start gap-3">
+                  <RefreshCw className="w-4 h-4 text-[#AFEB00] shrink-0 mt-0.5" />
                   <span>{current.outcome}</span>
                 </div>
               </div>
             </div>
 
             {/* Right: Concrete Capabilities Delivered */}
-            <div className="lg:col-span-7 bg-black/30 rounded-2xl p-6 sm:p-7 border border-white/[0.06]">
-              <div className="text-xs uppercase font-mono font-bold text-slate-400 tracking-wider mb-4 flex items-center justify-between">
+            <div className="lg:col-span-7 bg-black/30 rounded-2xl p-6 sm:p-7 border border-white/[0.08]">
+              <div className="text-xs uppercase font-mono font-bold text-slate-300 tracking-wider mb-4 flex items-center justify-between">
                 <span>Integrated Capabilities</span>
-                <span className="text-[10px] font-normal text-amber-400">Execution Layer</span>
+                <span className="text-[10px] font-bold text-[#AFEB00]">Execution Layer</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {current.capabilities.map((cap, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs sm:text-sm text-slate-200 flex items-center gap-2.5 hover:border-amber-500/30 hover:bg-white/[0.04] transition-all"
+                    className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-xs sm:text-sm text-slate-200 flex items-center gap-2.5 hover:border-[#AFEB00]/40 hover:bg-white/[0.06] transition-all"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#AFEB00] shrink-0"></span>
                     <span>{cap}</span>
                   </div>
                 ))}
               </div>
 
               {onExploreCapabilities && (
-                <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-end">
+                <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-end">
                   <button
                     onClick={onExploreCapabilities}
-                    className="text-xs font-semibold text-black bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 px-4 py-2 rounded-full flex items-center gap-1.5 transition-all shadow-md shadow-amber-500/20"
+                    className="text-xs font-bold text-[#141414] bg-[#AFEB00] hover:bg-[#9CD600] px-5 py-2.5 rounded-full flex items-center gap-1.5 transition-all shadow-md shadow-[#AFEB00]/25 active:scale-95"
                   >
                     <span>View All 5 Solution Groups</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#141414]" />
                   </button>
                 </div>
               )}
