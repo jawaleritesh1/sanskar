@@ -1,31 +1,21 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import { motion } from 'framer-motion';
+import {
   ArrowRight,
   Check,
   CheckCircle2,
   ChevronDown,
   Layers,
-  Target, 
-  Zap,
-  Cpu,
   Sparkles,
   TrendingUp,
   Code2,
   Newspaper,
-  Compass, 
-  Shield,
-  Clock,
-  BarChart3,
-  Activity,
-  ArrowUpRight,
-  HelpCircle,
-  ShieldCheck,
-  Rocket
+  Compass,
+  Rocket,
+  Zap
 } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import { solutionsData } from '../data/solutionsData';
-import { ServiceItem, GrowthSolution } from '../types';
 
 interface SolutionsViewProps {
   initialServiceSlug?: string;
@@ -43,6 +33,14 @@ const fadeUp = {
   },
 };
 
+const capabilityPhotos: Record<string, string> = {
+  'digital-growth': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+  'technology': 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+  'brand-creative': 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80',
+  'business-media': 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80',
+  'business-consulting': 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80',
+};
+
 export const SolutionsView: React.FC<SolutionsViewProps> = ({
   initialServiceSlug,
   onNavigate,
@@ -55,372 +53,471 @@ export const SolutionsView: React.FC<SolutionsViewProps> = ({
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
 
   const currentService = servicesData.find(s => s.slug === selectedServiceSlug) || servicesData[0];
-
-  const getServiceIcon = (id: string, isSelected: boolean) => {
-    const iconClass = isSelected ? "text-[#AFEB00]" : "text-[#2033FF]";
-    switch (id) {
-      case 'digital-growth': return <TrendingUp className={`w-5 h-5 ${iconClass}`} />;
-      case 'technology': return <Code2 className={`w-5 h-5 ${iconClass}`} />;
-      case 'brand-creative': return <Sparkles className={`w-5 h-5 ${iconClass}`} />;
-      case 'business-media': return <Newspaper className={`w-5 h-5 ${iconClass}`} />;
-      case 'business-consulting': return <Compass className={`w-5 h-5 ${iconClass}`} />;
-      default: return <Layers className={`w-5 h-5 ${iconClass}`} />;
-    }
-  };
+  const activePhoto = capabilityPhotos[currentService.slug] || capabilityPhotos['digital-growth'];
 
   return (
-    <div className="w-full bg-transparent text-white pt-28 sm:pt-32 pb-24 font-sans selection:bg-[#AFEB00] selection:text-[#141414] overflow-x-hidden">
-      
-      {/* Background Ambient Glows */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.08, 1], opacity: [0.2, 0.35, 0.2] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#2033FF]/25 blur-[120px]"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-0 top-96 h-[500px] w-[500px] rounded-full bg-[#AFEB00]/20 blur-[140px]"
-        />
-      </div>
+    <div className="w-full bg-[#080E32] text-white font-sans selection:bg-[#AFEB00] selection:text-[#0F1B64] overflow-x-hidden">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Page Hero */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="max-w-4xl mb-16"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="h-[2px] w-8 bg-[#AFEB00]" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#AFEB00] font-heading">
-              Engineered Growth Capabilities
-            </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading tracking-[-0.03em] text-white leading-[1.08]">
-            Integrated Digital Systems <br />
-            To{" "}
-            <span className="relative inline-block text-[#AFEB00]">
-              Attract, Convert &amp; Scale
-            </span>
-          </h1>
-
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-            We don't sell disconnected agency deliverables. We engineer synchronized digital growth systems combining performance marketing, custom web engineering, brand authority, and strategic automation into one scalable operating layer.
-          </p>
-        </motion.div>
-
-        {/* 5 Capability Selector Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 mb-12">
-          {servicesData.map((s) => {
-            const isSelected = selectedServiceSlug === s.slug;
-            return (
-              <button
-                key={s.slug}
-                onClick={() => {
-                  setSelectedServiceSlug(s.slug);
-                  setOpenFaqIdx(0);
-                }}
-                className={`group p-5 rounded-2xl text-left border transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
-                  isSelected
-                    ? 'bg-[#0E1A5A] text-white border-[#AFEB00] shadow-xl shadow-[#2033FF]/20 -translate-y-1'
-                    : 'bg-[#0B1446]/70 border-white/10 text-slate-300 hover:border-white/20 hover:bg-[#0B1446] hover:text-white'
-                }`}
-              >
-                {/* Top Accent Line for Selected */}
-                {isSelected && (
-                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF]" />
-                )}
-
-                <div className="flex items-center justify-between mb-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-                    isSelected ? 'bg-white/10 shadow-inner' : 'bg-white/5 border border-white/10'
-                  }`}>
-                    {getServiceIcon(s.id, isSelected)}
-                  </div>
-                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                    isSelected
-                      ? 'bg-[#AFEB00] text-[#141414] font-extrabold'
-                      : 'bg-[#070D2B] text-slate-400 border border-white/10'
-                  }`}>
-                    {s.stage}
-                  </span>
-                </div>
-
-                <div>
-                  <div className={`text-sm font-bold font-heading leading-tight ${isSelected ? 'text-white' : 'text-slate-200'}`}>
-                    {s.title}
-                  </div>
-                  <div className={`text-[11px] font-medium mt-1 line-clamp-1 ${isSelected ? 'text-slate-300' : 'text-slate-400'}`}>
-                    {s.category}
-                  </div>
-                </div>
-              </button>
-            );
-          })}
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          01. SOLUTIONS HERO (CINEMATIC DARK SKYLINE SPLIT)
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 border-b border-white/10 bg-[#080E32] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#2033FF]/15 blur-[140px]" />
+          <div className="absolute right-0 top-60 h-[500px] w-[500px] rounded-full bg-[#AFEB00]/5 blur-[150px]" />
         </div>
 
-        {/* Active Capability Deep-Dive View */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentService.slug}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.35 }}
-            className="rounded-3xl bg-[#0B1446]/90 border border-white/15 p-7 sm:p-12 mb-24 shadow-2xl relative overflow-hidden text-white"
-          >
-            {/* Top Accent Line */}
-            <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF]" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
 
-            {/* Capability Header */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-white/10 mb-10 relative z-10">
-              <div>
-                <div className="flex items-center gap-2.5 mb-2.5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#AFEB00] font-heading">
-                    GROWTH STAGE: {currentService.stage.toUpperCase()}
-                  </span>
-                  <span className="text-white/20">•</span>
-                  <span className="text-xs text-slate-400 font-semibold">{currentService.category}</span>
+            {/* Left Content */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="lg:col-span-7 space-y-4 sm:space-y-5"
+            >
+              <div className="flex items-center gap-3">
+                <span className="h-[2px] w-8 bg-[#AFEB00]" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#AFEB00] font-mono">
+                  Engineered Growth Capabilities
+                </span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-white leading-[1.08]">
+                Integrated Digital Systems <br />
+                To{" "}
+                <span className="font-heading font-bold text-[#AFEB00]">
+                  Attract, Convert &amp; Scale
+                </span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+                We reject disconnected agency silos. We architect synchronized growth operations combining high-yield acquisition, sub-second web platforms, category brand authority, and automated CRM pipelines into one sovereign layer.
+              </p>
+
+              <div className="font-heading text-base sm:text-lg text-slate-200 font-semibold tracking-tight flex items-center gap-2">
+                <span className="h-0.5 w-6 bg-[#2033FF]" />
+                <span>Five synchronized capabilities. One accountable partner.</span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <button
+                  onClick={() => onOpenProjectModal(selectedServiceSlug)}
+                  className="px-8 py-3.5 rounded-xl bg-[#AFEB00] hover:bg-[#9CD100] text-[#0F1B64] text-xs sm:text-sm font-heading font-bold uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-[#AFEB00]/25 transition-all hover:-translate-y-0.5"
+                >
+                  <span>Deploy {currentService.title}</span>
+                  <ArrowRight size={15} />
+                </button>
+
+                <button
+                  onClick={onOpenDiagnostic}
+                  className="px-6 py-3 rounded-xl bg-[#0A1245] hover:bg-[#0F1B64] text-white border border-white/20 text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all"
+                >
+                  Launch 60s Diagnostic
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Right Hero Image Showcase */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:col-span-5 relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[16/11] border border-white/15 shadow-2xl shadow-black/80">
+                <img
+                  src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=80"
+                  alt="SGS Strategic Operations Architecture"
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080E32] via-transparent to-black/30" />
+              </div>
+
+              <div className="absolute -bottom-6 -left-4 sm:-left-6 bg-[#0A1245] border border-white/15 p-4 rounded-xl shadow-2xl backdrop-blur-xl max-w-[220px] space-y-1.5 z-20">
+                <div className="flex items-center gap-2 text-[#AFEB00]">
+                  <Zap size={16} />
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider">Unified Stack</span>
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white tracking-tight">
-                  {currentService.title}
-                </h2>
-                <p className="text-sm sm:text-base text-slate-300 mt-2.5 max-w-2xl leading-relaxed">
-                  {currentService.tagline}
-                </p>
-              </div>
-
-              <button
-                onClick={() => onOpenProjectModal(currentService.slug)}
-                className="group flex items-center gap-3 rounded-full bg-[#AFEB00] px-7 py-3.5 text-xs sm:text-sm font-bold text-[#141414] shadow-xl shadow-[#AFEB00]/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#9CD600] hover:shadow-2xl self-start lg:self-auto"
-              >
-                <span>Deploy {currentService.title}</span>
-                <ArrowRight size={16} className="text-[#141414] transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-            </div>
-
-            {/* Overview & Core Outcome Bento */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 relative z-10">
-              <div className="lg:col-span-7 space-y-3.5">
-                <div className="flex items-center gap-2">
-                  <span className="h-[2px] w-4 bg-[#AFEB00]" />
-                  <h3 className="text-xs uppercase font-bold text-white font-heading tracking-wider">
-                    Strategic Scope &amp; Commercial Objective
-                  </h3>
+                <div className="text-xs text-slate-200 leading-snug font-medium">
+                  Demand gen, custom code, and CRM automation fully integrated.
                 </div>
-                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                  {currentService.description}
-                </p>
               </div>
 
-              <div className="lg:col-span-5 p-6 rounded-2xl bg-[#070D2B] border border-white/10 space-y-2 relative overflow-hidden">
-                <div className="flex items-center gap-2">
-                  <Sparkles size={16} className="text-[#AFEB00]" />
-                  <span className="text-[11px] uppercase font-bold text-[#AFEB00] font-heading tracking-wider block">
-                    Primary Commercial Outcome
-                  </span>
-                </div>
-                <p className="text-sm sm:text-base font-bold text-white font-heading">
-                  {currentService.businessOutcome}
-                </p>
+              <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-white/20 text-white font-mono text-[11px] font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#AFEB00] animate-pulse" />
+                <span>Pune • Global Reach</span>
               </div>
+            </motion.div>
+
+          </div>
+
+          {/* Stats Bar Strip */}
+          <div className="mt-10 pt-6 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div>
+              <div className="text-2xl sm:text-3xl font-heading font-bold text-white">5 Capabilities</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">One Integrated Engine</div>
             </div>
-
-            {/* Execution Capabilities & Deliverables Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative z-10">
-              
-              {/* Capabilities */}
-              <div className="p-7 rounded-2xl bg-[#070D2B]/80 border border-white/10">
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-xs uppercase font-bold text-white font-heading tracking-wider flex items-center gap-2">
-                    <span className="h-[2px] w-3 bg-[#2033FF]" />
-                    <span>Execution Capabilities</span>
-                  </h3>
-                  <span className="text-[11px] font-semibold text-slate-400">Integrated Stack</span>
-                </div>
-                <ul className="space-y-3">
-                  {currentService.capabilities.map((cap, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-200 font-medium">
-                      <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10">
-                        <Check size={12} className="text-[#AFEB00] font-bold" />
-                      </div>
-                      <span>{cap}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Deliverables */}
-              <div className="p-7 rounded-2xl bg-[#070D2B]/80 border border-white/10">
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-xs uppercase font-bold text-white font-heading tracking-wider flex items-center gap-2">
-                    <span className="h-[2px] w-3 bg-[#AFEB00]" />
-                    <span>Concrete Deliverables</span>
-                  </h3>
-                  <span className="text-[11px] font-semibold text-slate-400">Assets &amp; Systems</span>
-                </div>
-                <ul className="space-y-3">
-                  {currentService.deliverables.map((deliv, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-200 font-medium">
-                      <CheckCircle2 size={16} className="text-[#AFEB00] shrink-0 mt-0.5" />
-                      <span>{deliv}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
+            <div>
+              <div className="text-2xl sm:text-3xl font-heading font-bold text-[#AFEB00]">&lt; 1s Speed</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Custom Platform SLA</div>
             </div>
-
-            {/* Process Journey */}
-            <div className="mb-12 relative z-10">
-              <div className="flex items-center gap-2 mb-6">
-                <span className="h-[2px] w-4 bg-[#AFEB00]" />
-                <h3 className="text-xs uppercase font-bold text-white font-heading tracking-wider">
-                  Execution Methodology
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {currentService.process.map((p, idx) => (
-                  <div key={idx} className="p-6 rounded-2xl bg-[#070D2B] border border-white/10 shadow-sm hover:border-[#AFEB00]/40 transition-all">
-                    <span className="text-xs font-bold text-[#AFEB00] font-heading block mb-2">
-                      PHASE {p.step}
-                    </span>
-                    <div className="text-sm font-bold font-heading text-white mb-1.5">{p.title}</div>
-                    <div className="text-xs text-slate-300 leading-relaxed">{p.desc}</div>
-                  </div>
-                ))}
-              </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-heading font-bold text-white">100% Attribution</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">End-to-End Tracking</div>
             </div>
-
-            {/* FAQs Accordion */}
-            <div className="relative z-10">
-              <div className="flex items-center gap-2 mb-5">
-                <HelpCircle size={16} className="text-[#AFEB00]" />
-                <h3 className="text-xs uppercase font-bold text-white font-heading tracking-wider">
-                  Frequently Addressed Questions
-                </h3>
-              </div>
-              <div className="space-y-3">
-                {currentService.faqs.map((faq, idx) => (
-                  <div key={idx} className="rounded-2xl bg-[#070D2B] border border-white/10 overflow-hidden transition-all">
-                    <button
-                      onClick={() => setOpenFaqIdx(openFaqIdx === idx ? null : idx)}
-                      className="w-full p-5 text-left flex items-center justify-between text-xs sm:text-sm font-bold font-heading text-white hover:text-[#AFEB00] transition-colors"
-                    >
-                      <span>{faq.question}</span>
-                      <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${openFaqIdx === idx ? 'rotate-180 text-[#AFEB00]' : ''}`} />
-                    </button>
-                    {openFaqIdx === idx && (
-                      <div className="p-5 pt-0 text-xs sm:text-sm text-slate-300 border-t border-white/10 leading-relaxed bg-[#060B24]">
-                        {faq.answer}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-heading font-bold text-[#AFEB00]">24h Dispatch</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Partner Discovery SLA</div>
             </div>
+          </div>
 
-          </motion.div>
-        </AnimatePresence>
+        </div>
+      </section>
 
-        {/* 4 Outcome-Oriented Growth Solutions Section */}
-        <div className="mb-20">
-          <div className="max-w-3xl mb-8">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="h-[2px] w-4 bg-[#AFEB00]" />
-              <span className="text-xs font-bold uppercase tracking-wider text-[#AFEB00] font-heading">
-                Outcome-Oriented Packages
-              </span>
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          02. PHOTOGRAPHIC 5 CAPABILITY SELECTOR (WARM IVORY / WHITE SECTION BACKGROUND)
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="py-14 sm:py-20 bg-[#F5FAFF] text-[#1A1A1A] border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+              <div className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#2033FF] mb-1.5">
+                SELECT A CAPABILITY
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-[#141414] tracking-tight leading-tight">
+                Architectural Breakdown by Domain
+              </h2>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white mt-1">
-              Need a packaged solution tailored to your stage?
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
-              Choose an outcome-oriented package to solve a specific commercial bottleneck with defined milestones.
+            <p className="text-xs sm:text-sm text-slate-600 max-w-md leading-relaxed">
+              Click any capability below to view execution deliverables, sprint methodologies, and guaranteed commercial outcomes.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {solutionsData.map((sol) => (
-              <div
-                key={sol.slug}
-                className="relative overflow-hidden p-7 rounded-3xl bg-[#0B1446]/85 border border-white/10 hover:border-[#AFEB00]/40 hover:bg-[#0E1A5A]/95 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:-translate-y-1 text-white"
-              >
-                {/* Top Hover Gradient Line */}
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          {/* 5 Photographic Vertical Cards against Light Canvas */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {servicesData.map((s, idx) => {
+              const isSelected = selectedServiceSlug === s.slug;
+              const photo = capabilityPhotos[s.slug] || capabilityPhotos['digital-growth'];
+              return (
+                <div
+                  key={s.slug}
+                  onClick={() => {
+                    setSelectedServiceSlug(s.slug);
+                    setOpenFaqIdx(0);
+                  }}
+                  className={`group relative h-[320px] sm:h-[360px] rounded-2xl overflow-hidden cursor-pointer border transition-all duration-300 flex flex-col justify-between p-4 sm:p-5 ${isSelected
+                      ? 'border-[#2033FF] ring-2 ring-[#2033FF]/30 shadow-2xl -translate-y-1.5'
+                      : 'border-slate-300/80 bg-slate-900 shadow-md hover:shadow-xl hover:-translate-y-1'
+                    }`}
+                >
+                  <img
+                    src={photo}
+                    alt={s.title}
+                    className={`absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 ${isSelected ? 'opacity-85' : 'opacity-75 group-hover:opacity-90'
+                      }`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
 
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xl font-bold font-heading text-white">{sol.title}</span>
-                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#070D2B] text-[#AFEB00] border border-white/10">
-                      {sol.badge}
+                  {/* Top Bar */}
+                  <div className="relative z-10 flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#AFEB00]">
+                      0{idx + 1}
+                    </span>
+                    <span className={`text-[10px] uppercase font-mono font-bold px-2 py-0.5 rounded-md border ${isSelected ? 'bg-[#AFEB00] text-[#0F1B64] border-[#AFEB00]' : 'bg-black/60 text-slate-200 border-white/20'
+                      }`}>
+                      {s.stage}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300 mb-5 leading-relaxed">{sol.tagline}</p>
-                  
-                  <div className="space-y-2 mb-6 text-xs text-slate-300">
-                    {sol.includedModules.slice(0, 3).map((m, idx) => (
-                      <div key={idx} className="flex items-center gap-2 font-medium">
-                        <Check size={14} className="text-[#AFEB00] shrink-0" />
-                        <span>{m}</span>
+
+                  {/* Bottom Content */}
+                  <div className="relative z-10 space-y-1.5 text-white">
+                    <h3 className={`text-base sm:text-lg font-heading font-bold leading-snug transition-colors ${isSelected ? 'text-[#AFEB00]' : 'text-white group-hover:text-[#AFEB00]'
+                      }`}>
+                      {s.title}
+                    </h3>
+                    <p className="text-[11px] text-slate-300 line-clamp-2 leading-relaxed font-sans">
+                      {s.tagline}
+                    </p>
+
+                    <div className="pt-2 flex items-center justify-between border-t border-white/15">
+                      <span className="text-[10px] font-mono text-slate-300">
+                        {isSelected ? '● Active View' : 'Explore →'}
+                      </span>
+                      <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-colors ${isSelected ? 'bg-[#AFEB00] text-[#0F1B64]' : 'bg-white/10 text-white group-hover:bg-[#AFEB00] group-hover:text-[#0F1B64]'
+                        }`}>
+                        <ArrowRight size={12} />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          03. DETAILED CAPABILITY SHOWCASE (CRISP WHITE EDITORIAL SPREAD)
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="py-14 sm:py-20 bg-white text-[#1A1A1A] border-b border-slate-200 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="bg-[#F5FAFF] border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-lg relative overflow-hidden">
+
+            {/* Top Bar Indicator */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-200">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#0F1B64] text-[#AFEB00] flex items-center justify-center font-mono font-bold text-sm">
+                  {currentService.stage.slice(0, 3)}
+                </div>
+                <div>
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
+                    Operating Capability Details
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#141414]">
+                    {currentService.title}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => onOpenProjectModal(selectedServiceSlug)}
+                  className="px-6 py-2.5 rounded-xl bg-[#0F1B64] hover:bg-[#0A1245] text-[#AFEB00] text-xs font-heading font-bold uppercase tracking-wider transition-all shadow-md flex items-center gap-2"
+                >
+                  <span>Inquire for {currentService.title}</span>
+                  <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
+
+            {/* Content Spread */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8">
+
+              {/* Left Column: Scope & Deliverables */}
+              <div className="lg:col-span-7 space-y-6">
+                <div>
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#2033FF] mb-2">
+                    Scope of Delivery
+                  </div>
+                  <p className="text-sm text-slate-700 leading-relaxed font-sans">
+                    {currentService.description}
+                  </p>
+                </div>
+
+                {/* Core Deliverables Grid */}
+                <div className="space-y-3">
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#141414]">
+                    Core Deliverables Included:
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {currentService.deliverables.map((del, dIdx) => (
+                      <div
+                        key={dIdx}
+                        className="flex items-start gap-2.5 p-3 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-medium"
+                      >
+                        <CheckCircle2 size={16} className="text-[#2033FF] shrink-0 mt-0.5" />
+                        <span>{del}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <button
-                  onClick={() => onOpenProjectModal(sol.slug)}
-                  className="w-full py-3 px-4 rounded-full bg-white/5 hover:bg-[#AFEB00] hover:text-[#141414] text-white text-xs font-bold font-heading flex items-center justify-center gap-2 transition-all duration-300 border border-white/15 hover:border-[#AFEB00] group/btn"
-                >
-                  <span>Inquire for {sol.title}</span>
-                  <ArrowRight size={14} className="text-slate-400 group-hover:text-[#141414] transition-transform duration-300 group-hover/btn:translate-x-1" />
-                </button>
+                {/* Commercial Business Outcome */}
+                {currentService.businessOutcome && (
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-1 shadow-sm">
+                    <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#2033FF]">
+                      Guaranteed Commercial Impact:
+                    </div>
+                    <div className="text-xs sm:text-sm text-[#141414] font-semibold leading-relaxed">
+                      {currentService.businessOutcome}
+                    </div>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Bottom Consultation Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#0B1446] to-[#070D2B] p-8 sm:p-12 border border-white/15 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl text-white">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#2033FF]/30 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#AFEB00]/15 rounded-full blur-3xl pointer-events-none" />
+              {/* Right Column: Execution Stages & FAQs */}
+              <div className="lg:col-span-5 space-y-6">
 
-          <div className="relative z-10 max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#AFEB00] border border-white/10 mb-3 backdrop-blur-sm font-heading">
-              <Rocket size={13} />
-              <span>Tailored Growth Architecture</span>
+                {/* 4-Step Process Timeline */}
+                <div className="p-5 rounded-2xl bg-white border border-slate-200 space-y-3 shadow-sm">
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#141414]">
+                    Execution Roadmap
+                  </div>
+                  <div className="space-y-3">
+                    {(currentService.process || []).map((step, pIdx) => (
+                      <div key={pIdx} className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded-md bg-[#0F1B64] text-[#AFEB00] text-[11px] font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">
+                          {step.step || pIdx + 1}
+                        </div>
+                        <div>
+                          <div className="text-xs font-heading font-bold text-[#141414]">{step.title}</div>
+                          <div className="text-[11px] text-slate-500 leading-snug mt-0.5 font-sans">{step.desc}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* FAQs Accordion */}
+                <div className="space-y-2 pt-1">
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#141414]">
+                    Frequently Answered Questions
+                  </div>
+                  {(currentService.faqs || []).map((faq, fIdx) => (
+                    <div
+                      key={fIdx}
+                      className="border border-slate-200 rounded-xl bg-white overflow-hidden transition-colors"
+                    >
+                      <button
+                        onClick={() => setOpenFaqIdx(openFaqIdx === fIdx ? null : fIdx)}
+                        className="w-full p-3 text-left flex items-center justify-between text-xs font-heading font-bold text-[#141414] hover:text-[#2033FF] transition-colors"
+                      >
+                        <span>{faq.question}</span>
+                        <ChevronDown size={14} className={`shrink-0 transition-transform ${openFaqIdx === fIdx ? 'rotate-180 text-[#2033FF]' : ''}`} />
+                      </button>
+                      {openFaqIdx === fIdx && (
+                        <div className="px-3 pb-3 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-2 font-sans">
+                          {faq.answer}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold font-heading text-white leading-tight">
-              Unsure which capability fits your current growth bottleneck?
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
-              Take our interactive 60-second diagnostic or schedule an architectural discovery consultation with our partners.
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          04. PACKAGED GROWTH ARCHITECTURES (WARM IVORY SECTION)
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="py-14 sm:py-20 bg-[#F5FAFF] text-[#1A1A1A] border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+              <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#2033FF] font-mono mb-1.5">
+                OUTCOME-ORIENTED PACKAGES
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-[#141414] tracking-tight leading-[1.1]">
+                Need a Packaged Solution<br />
+                Tailored to Your Stage?
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-md leading-relaxed">
+              Choose an outcome-oriented system package to solve a specific commercial bottleneck with defined milestones.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 shrink-0 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {solutionsData.map((pkg) => (
+              <div
+                key={pkg.id}
+                className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <div className="space-y-3.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#2033FF]">
+                      {pkg.badge}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#0F1B64] text-[#AFEB00]">
+                      {pkg.tagline}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#141414] group-hover:text-[#2033FF] transition-colors">
+                    {pkg.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 leading-relaxed font-sans">
+                    {pkg.coreProblem}
+                  </p>
+
+                  <div className="pt-2 border-t border-slate-100 space-y-1.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-mono block">
+                      Includes:
+                    </span>
+                    {pkg.deliverables.map((item, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                        <Check size={14} className="text-[#2033FF] mt-0.5 shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-slate-100">
+                  <button
+                    onClick={() => onOpenProjectModal(pkg.id)}
+                    className="w-full py-2.5 rounded-xl bg-[#0F1B64] text-white hover:bg-[#0A1245] text-xs font-heading font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+                  >
+                    <span>Inquire for {pkg.title}</span>
+                    <ArrowRight size={13} className="text-[#AFEB00]" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          05. CINEMATIC SUMMIT BOTTOM CTA BANNER
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="relative py-16 sm:py-22 bg-[#080E32] text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/cta-summit.jpg"
+            alt="Mountain Summit Sunset"
+            className="w-full h-full object-cover object-center opacity-30 mix-blend-luminosity"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080E32] via-[#080E32]/70 to-[#080E32]" />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 border border-white/15 text-[#AFEB00] text-xs font-mono font-bold tracking-wider uppercase mb-2">
+            <span>Direct Partner Consultation</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-white max-w-3xl mx-auto leading-[1.08]">
+            Ready to Architect Your Enterprise Growth Engine?
+          </h2>
+
+          <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
+            Let's evaluate your commercial bottlenecks and engineer a sovereign system built for lasting scale.
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => onOpenProjectModal(selectedServiceSlug)}
+              className="px-9 py-4 rounded-xl bg-[#AFEB00] hover:bg-[#9CD100] text-[#0F1B64] text-xs sm:text-sm font-heading font-bold uppercase tracking-wider flex items-center gap-2 shadow-xl shadow-[#AFEB00]/25 transition-transform hover:-translate-y-0.5"
+            >
+              <span>Start a Conversation</span>
+              <ArrowRight size={15} />
+            </button>
+
             <button
               onClick={onOpenDiagnostic}
-              className="px-6 py-3.5 rounded-full border border-white/20 bg-white/5 text-xs font-semibold text-white hover:bg-white/15 transition-all backdrop-blur-md hover:-translate-y-0.5"
+              className="px-8 py-4 rounded-xl bg-[#0A1245]/80 hover:bg-[#0F1B64] text-white border border-white/20 text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all"
             >
-              Take 60s Diagnostic
-            </button>
-            <button
-              onClick={() => onOpenProjectModal()}
-              className="flex items-center gap-2 rounded-full bg-[#AFEB00] px-7 py-3.5 text-xs sm:text-sm font-bold text-[#141414] shadow-xl shadow-[#AFEB00]/25 transition-all duration-300 hover:bg-[#9CD600] hover:-translate-y-0.5 active:scale-95"
-            >
-              <span>Start Conversation</span>
-              <ArrowRight size={15} />
+              <span>Take Growth Diagnostic</span>
             </button>
           </div>
         </div>
+      </section>
 
-      </div>
     </div>
   );
 };

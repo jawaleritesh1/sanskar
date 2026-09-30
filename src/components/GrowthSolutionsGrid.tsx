@@ -27,10 +27,10 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
   return (
     <section id="growth-solutions" className="py-24 bg-[#0F1B64] border-t border-b border-white/[0.08] text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] border border-[#AFEB00]/30 text-[#AFEB00] text-xs font-mono font-semibold uppercase tracking-wider mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.08] border border-[#AFEB00]/30 text-[#AFEB00] text-xs font-mono font-semibold uppercase tracking-wider mb-4 shadow-sm">
             <Target className="w-3.5 h-3.5 text-[#AFEB00]" />
             Outcome-Oriented Packages
           </div>
@@ -48,15 +48,15 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
             <div
               key={sol.slug}
               id={`solution-card-${sol.slug}`}
-              className="rounded-3xl bg-[#0A1245]/90 border border-white/[0.08] p-7 flex flex-col justify-between hover:bg-[#121c60] hover:border-[#AFEB00]/50 transition-all duration-300 group relative shadow-2xl hover:-translate-y-1"
+              className="rounded-2xl bg-[#0A1245]/90 border border-white/[0.08] p-7 flex flex-col justify-between hover:bg-[#121c60] hover:border-[#AFEB00]/50 transition-all duration-300 group relative shadow-2xl hover:-translate-y-1"
             >
               {/* Top Meta */}
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-2xl bg-[#AFEB00]/15 border border-[#AFEB00]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-[#AFEB00]/15 border border-[#AFEB00]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
                     {getSolutionIcon(sol.slug)}
                   </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#AFEB00]/15 text-[#AFEB00] border border-[#AFEB00]/30">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-lg bg-[#AFEB00]/15 text-[#AFEB00] border border-[#AFEB00]/30">
                     {sol.badge}
                   </span>
                 </div>
@@ -64,7 +64,7 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
                 <h3 className="text-2xl font-bold text-white tracking-tight mb-2 font-heading">
                   {sol.title}
                 </h3>
-                
+
                 <p className="text-xs text-slate-300 font-medium line-clamp-2 mb-4 leading-relaxed font-sans">
                   {sol.tagline}
                 </p>
@@ -97,7 +97,7 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
                     setSelectedSolutionModal(sol);
                     onSelectSolution?.(sol);
                   }}
-                  className="w-full py-2.5 px-3 rounded-xl bg-white/[0.06] hover:bg-[#AFEB00] hover:text-[#141414] text-slate-200 text-xs font-bold flex items-center justify-center gap-1.5 transition-all group/btn border border-white/10 hover:border-[#AFEB00]/50 active:scale-95"
+                  className="w-full py-2.5 px-3 rounded-xl bg-white/[0.06] hover:bg-[#AFEB00] hover:text-[#141414] text-slate-200 text-xs font-bold flex items-center justify-center gap-1.5 transition-all group/btn border border-white/10 hover:border-[#AFEB00]/50 active:scale-95 cursor-pointer font-heading"
                 >
                   <span>Learn More</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#AFEB00] group-hover/btn:text-[#141414] group-hover/btn:translate-x-0.5 transition-all" />
@@ -113,12 +113,12 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
       {/* Solution Detail Modal */}
       {selectedSolutionModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1245]/85 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="relative w-full max-w-2xl bg-[#0F1B64] border border-white/15 rounded-3xl p-6 sm:p-8 text-white shadow-2xl max-h-[90vh] overflow-y-auto">
-            
+          <div className="relative w-full max-w-2xl bg-[#0F1B64] border border-white/15 rounded-2xl p-6 sm:p-8 text-white shadow-2xl max-h-[90vh] overflow-y-auto">
+
             {/* Modal Header */}
             <div className="flex items-start justify-between gap-4 mb-6">
               <div>
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#AFEB00]/15 text-xs font-mono font-bold text-[#AFEB00] border border-[#AFEB00]/30 mb-2">
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-lg bg-[#AFEB00]/15 text-xs font-mono font-bold text-[#AFEB00] border border-[#AFEB00]/30 mb-2">
                   {selectedSolutionModal.badge}
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white font-heading">
@@ -139,9 +139,9 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
 
             {/* Modal Body */}
             <div className="space-y-6 text-sm">
-              
+
               {/* Problem Solved */}
-              <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08]">
+              <div className="p-4 rounded-xl bg-black/40 border border-white/[0.08]">
                 <span className="text-[10px] uppercase font-mono font-bold text-[#AFEB00] block mb-1">
                   Core Bottleneck Solved:
                 </span>
@@ -153,12 +153,12 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
               {/* Modules & Deliverables */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <h4 className="text-[10px] uppercase font-mono font-bold text-[#AFEB00] tracking-wider">
+                  <h4 className="text-[10px] uppercase font-mono font-bold text-[#AFEB00] tracking-wider font-heading">
                     Included Architecture
                   </h4>
                   <ul className="space-y-2">
                     {selectedSolutionModal.includedModules.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-300">
+                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-300 font-sans">
                         <Check className="w-3.5 h-3.5 text-[#AFEB00] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -167,12 +167,12 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
                 </div>
 
                 <div className="space-y-2">
-                  <h4 className="text-[10px] uppercase font-mono font-bold text-[#AFEB00] tracking-wider">
+                  <h4 className="text-[10px] uppercase font-mono font-bold text-[#AFEB00] tracking-wider font-heading">
                     Concrete Deliverables
                   </h4>
                   <ul className="space-y-2">
                     {selectedSolutionModal.deliverables.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-300">
+                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-300 font-sans">
                         <Check className="w-3.5 h-3.5 text-[#AFEB00] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -183,7 +183,7 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
 
               {/* Expected Outcomes */}
               <div>
-                <h4 className="text-[10px] uppercase font-mono font-bold text-[#AFEB00] tracking-wider mb-2">
+                <h4 className="text-[10px] uppercase font-mono font-bold text-[#AFEB00] tracking-wider mb-2 font-heading">
                   Target Commercial Outcomes
                 </h4>
                 <div className="space-y-2">
@@ -207,7 +207,7 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
             <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-end gap-3">
               <button
                 onClick={() => setSelectedSolutionModal(null)}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white bg-white/5 border border-white/10"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-heading font-semibold text-slate-300 hover:text-white bg-white/5 border border-white/10"
               >
                 Close
               </button>
@@ -217,17 +217,16 @@ export const GrowthSolutionsGrid: React.FC<GrowthSolutionsGridProps> = ({
                   setSelectedSolutionModal(null);
                   onStartProjectForSolution?.(sol);
                 }}
-                className="w-full sm:w-auto px-5 py-2.5 rounded-full text-xs font-bold text-[#141414] bg-[#AFEB00] hover:bg-[#9CD600] flex items-center justify-center gap-1.5 shadow-lg shadow-[#AFEB00]/25 active:scale-95"
+                className="w-full sm:w-auto px-6 py-2.5 rounded-xl text-xs font-heading font-bold text-[#141414] bg-[#AFEB00] hover:bg-[#9CD100] flex items-center justify-center gap-1.5 shadow-lg shadow-[#AFEB00]/25 active:scale-95 cursor-pointer"
               >
                 <span>Inquire About {selectedSolutionModal.title}</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#141414]" />
               </button>
             </div>
-
           </div>
         </div>
       )}
 
-    </section>
-  );
+        </section>
+      );
 };

@@ -1,21 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   ArrowRight,
-  CheckCircle2,
-  Shield,
   Target,
   Compass,
-  Layers,
-  Users,
-  Zap,
-  Code2,
-  TrendingUp,
-  Sparkles,
-  Newspaper,
-  Rocket
+  Rocket,
+  Search,
+  Lightbulb,
+  Cpu,
+  BarChart3,
+  CheckCircle2,
+  ShieldCheck,
+  Zap
 } from 'lucide-react';
-import { ApproachTimeline } from '../components/ApproachTimeline';
 
 interface AboutViewProps {
   onNavigate: (path: string) => void;
@@ -32,195 +29,319 @@ const fadeUp = {
   },
 };
 
+const approachSteps = [
+  { num: '01', title: 'Discover', desc: 'Understand your business, market and commercial opportunities.', icon: Search },
+  { num: '02', title: 'Strategise', desc: 'Build an accountable, tailored growth roadmap.', icon: Lightbulb },
+  { num: '03', title: 'Build', desc: 'Develop and engineer sovereign technology and campaigns.', icon: Cpu },
+  { num: '04', title: 'Launch', desc: 'Go to market with data calibration and precision.', icon: Rocket },
+  { num: '05', title: 'Scale', desc: 'Automate CRM workflows, optimize yield and compound growth.', icon: BarChart3 },
+];
+
 export const AboutView: React.FC<AboutViewProps> = ({
   onNavigate,
   onOpenProjectModal,
   onOpenDiagnostic
 }) => {
   return (
-    <div className="w-full bg-transparent text-white pt-28 sm:pt-32 pb-24 font-sans selection:bg-[#AFEB00] selection:text-[#141414] overflow-x-hidden">
-      
-      {/* Subtle Ambient Radial Lighting */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.08, 1], opacity: [0.2, 0.35, 0.2] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#2033FF]/25 blur-[120px]"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-0 top-96 h-[500px] w-[500px] rounded-full bg-[#AFEB00]/20 blur-[140px]"
-        />
-      </div>
+    <div className="w-full bg-[#0F1B64] text-white font-sans selection:bg-[#AFEB00] selection:text-[#0F1B64] overflow-x-hidden">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Page Hero */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="max-w-4xl mb-20"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="h-[2px] w-8 bg-[#AFEB00]" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#AFEB00] font-heading">
-              About Sanskar Growth Solutions
-            </span>
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          01. ABOUT HERO (CINEMATIC DARK SPLIT)
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 border-b border-white/10 bg-[#0F1B64] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#2033FF]/15 blur-[140px]" />
+          <div className="absolute right-0 top-60 h-[500px] w-[500px] rounded-full bg-[#AFEB00]/5 blur-[150px]" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+
+            {/* Left Narrative Column (Span 7) */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="lg:col-span-7 space-y-4 sm:space-y-5"
+            >
+              <div className="flex items-center gap-3">
+                <span className="h-[2px] w-8 bg-[#AFEB00]" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#AFEB00] font-mono">
+                  About Sanskar Growth Solutions
+                </span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-white leading-[1.08]">
+                More Than a Service Provider. <br />
+                <span className="text-[#AFEB00]">
+                  A Sovereign Growth Partner.
+                </span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+                Sanskar Growth Solutions is a modern Indian company that brings together strategic intelligence, technology, performance acquisition, brand creative, and business media to help enterprises achieve durable, compounding market advantage.
+              </p>
+
+              <div className="font-heading text-lg sm:text-xl text-slate-200 font-bold tracking-tight flex items-center gap-2">
+                <span className="h-0.5 w-6 bg-[#2033FF]" />
+                <span>Built for Sovereign Business Scale</span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <button
+                  onClick={onOpenProjectModal}
+                  className="px-8 py-3.5 rounded-xl bg-[#AFEB00] hover:bg-[#9CD100] text-[#0F1B64] text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-[#AFEB00]/25 transition-all hover:-translate-y-0.5"
+                >
+                  <span>Start a Conversation</span>
+                  <ArrowRight size={15} />
+                </button>
+
+                <button
+                  onClick={onOpenDiagnostic}
+                  className="px-6 py-3 rounded-xl bg-[#0F1B64] hover:bg-[#2033FF] text-white border border-white/20 text-xs sm:text-sm font-bold transition-all"
+                >
+                  60s Growth Diagnostic
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Right Building Graphic with Floating Badge (Span 5) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:col-span-5 relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[16/11] border border-white/15 shadow-2xl shadow-black/80">
+                <img
+                  src="/images/sgs-hq-building.jpg"
+                  alt="Sanskar Growth Solutions Corporate Building"
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F1B64] via-transparent to-black/30" />
+              </div>
+
+              {/* Floating Dark Capability Card */}
+              <div className="absolute -bottom-6 -left-4 sm:-left-6 bg-[#0F1B64] border border-white/15 p-4 rounded-xl shadow-2xl backdrop-blur-xl max-w-[220px] space-y-1.5 z-20">
+                {['Growth', 'Strategy', 'Technology', 'Creativity', 'Execution', 'Real Business Impact.'].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className={`text-xs ${idx === 5 ? 'text-[#AFEB00] font-bold pt-1 border-t border-white/15 font-mono' : 'text-slate-200 font-medium'
+                      }`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+
+              <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-white font-mono text-[11px] font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#AFEB00] animate-pulse" />
+                <span>Pune, Maharashtra</span>
+              </div>
+            </motion.div>
+
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading tracking-[-0.03em] text-white leading-[1.08]">
-            Building Better Businesses Through{" "}
-            <span className="relative inline-block text-[#AFEB00]">
-              Technology &amp; Innovation
-            </span>
-          </h1>
+          {/* Stats Bar Strip */}
+          <div className="mt-10 pt-6 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div>
+              <div className="text-2xl sm:text-3xl font-heading font-bold text-white">Pune HQ</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Global Footprint</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-heading font-bold text-[#AFEB00]">5 Disciplines</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">One Unified Team</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-heading font-bold text-white">100% Owned</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Client IP Sovereignty</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-heading font-bold text-[#AFEB00]">24h SLA</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Partner Direct Access</div>
+            </div>
+          </div>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-            Sanskar Growth Solutions (SGS) was founded on a simple conviction: modern businesses do not need another list of isolated marketing or IT services—they need one cohesive operating layer that helps them attract, convert, and scale.
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          02. PURPOSE & VISION (CLOUD SECTION FOR HIGH CONTRAST PRESTIGE)
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="py-14 sm:py-20 bg-[#F5FAFF] text-[#141414] border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-10">
+            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
+              <div className="flex items-center gap-2">
+                <span className="h-[2px] w-6 bg-[#2033FF]" />
+                <span className="text-xs font-bold uppercase tracking-wider text-[#2033FF] font-mono">
+                  WHO WE ARE
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-[#141414] tracking-tight leading-[1.1]">
+                A Digital Transformation &amp; Growth Partner.
+              </h2>
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans">
+                We are neither a conventional marketing agency selling vanity impressions, nor a distant IT vendor writing code in isolation.
+              </p>
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans">
+                SGS acts as an embedded growth partner for ambitious founders, SME owners, and enterprise leaders. We align market research, brand positioning, high-intent advertising, custom web architecture, and CRM automation directly with top-line commercial revenue.
+              </p>
+            </div>
+
+            <div className="lg:col-span-6 space-y-4">
+              {/* Purpose Card */}
+              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#0F1B64] text-[#AFEB00] flex items-center justify-center">
+                    <Target size={18} />
+                  </div>
+                  <h3 className="text-xl font-heading font-bold text-[#141414]">Our Purpose</h3>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  To empower Indian and global enterprises with intelligent growth systems that create sovereign value for a stronger, more prosperous business ecosystem.
+                </p>
+              </div>
+
+              {/* Vision Card */}
+              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#0F1B64] text-[#AFEB00] flex items-center justify-center">
+                    <Compass size={18} />
+                  </div>
+                  <h3 className="text-xl font-heading font-bold text-[#141414]">Our Vision</h3>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  To be India's most trusted growth partner across key industries, combining strategic intelligence, engineering craft and brand authority to build businesses that matter.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Beliefs Grid */}
+          <div className="pt-8 border-t border-slate-200">
+            <div className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#2033FF] mb-6">
+              CORE OPERATING BELIEFS
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                <div className="text-xs font-mono font-bold text-[#2033FF]">01</div>
+                <h4 className="text-lg font-heading font-bold text-[#141414]">High Agency &amp; Ownership</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  We don't pass tickets between siloed sub-departments. Our senior team takes direct accountability for your conversion metrics and commercial outcomes.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                <div className="text-xs font-mono font-bold text-[#2033FF]">02</div>
+                <h4 className="text-lg font-heading font-bold text-[#141414]">Craft Meets Velocity</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  We obsess over clean code, sub-second load times, and typographic perfection, but we always judge success by enterprise EBITDA and sales velocity.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                <div className="text-xs font-mono font-bold text-[#2033FF]">03</div>
+                <h4 className="text-lg font-heading font-bold text-[#141414]">Unified Operating Layer</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  When ads, websites, CRMs, and brand media operate from a single unified architecture, CAC drops and customer lifetime value multiplies.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          03. 5-PHASE APPROACH (CRISP WHITE ARCHITECTURAL SPREAD)
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="py-14 sm:py-20 bg-white border-b border-slate-200 text-[#141414]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
+            <div>
+              <div className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#2033FF] mb-1.5">
+                OUR METHODOLOGY
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-[#141414] tracking-tight leading-[1.1]">
+                A Clear Path From<br />
+                Insight to Impact.
+              </h2>
+            </div>
+            <div className="font-heading text-lg sm:text-xl text-[#0F1B64] font-bold tracking-tight flex items-center gap-2">
+              <span className="h-0.5 w-6 bg-[#AFEB00]" />
+              <span>Growth Without Guesswork</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+            {approachSteps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.num} className="p-5 rounded-2xl bg-[#F5FAFF] border border-slate-200 space-y-3 hover:border-[#0F1B64] transition-all shadow-sm">
+                  <div className="w-8 h-8 rounded-xl bg-[#0F1B64] text-[#AFEB00] flex items-center justify-center">
+                    <Icon size={16} />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold text-[#2033FF] block mb-0.5">
+                      PHASE {step.num}
+                    </span>
+                    <h3 className="text-base font-heading font-bold text-[#141414]">
+                      {step.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════════
+          04. CINEMATIC SUMMIT BOTTOM CTA BANNER
+      ═══════════════════════════════════════════════════════════════════════════ */}
+      <section className="relative py-16 sm:py-22 bg-[#0F1B64] text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/cta-summit.jpg"
+            alt="Mountain Summit Sunset"
+            className="w-full h-full object-cover object-center opacity-30 mix-blend-luminosity"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F1B64] via-[#0F1B64]/70 to-[#0F1B64]" />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#AFEB00] text-xs font-mono font-bold tracking-wider uppercase mb-2">
+            <span>Direct Partner Consultation</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-white max-w-3xl mx-auto leading-[1.08]">
+            Partner with Us to Build a Sovereign Growth Engine.
+          </h2>
+
+          <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
+            Let's evaluate your commercial bottlenecks and engineer a bespoke system built for compounding market scale.
           </p>
-        </motion.div>
 
-        {/* Who We Are & Philosophy Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24 pb-16 border-b border-white/10">
-          <div className="lg:col-span-6 space-y-6">
-            <div className="flex items-center gap-2">
-              <span className="h-[2px] w-4 bg-[#AFEB00]" />
-              <span className="text-xs font-bold uppercase tracking-wider text-[#AFEB00] font-heading">
-                WHO WE ARE
-              </span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white tracking-tight leading-tight">
-              A Business Growth &amp; Digital Transformation Partner.
-            </h2>
-            <p className="text-base text-slate-300 leading-relaxed">
-              We are not a conventional digital marketing agency selling vanity likes, nor are we a distant software outsourcing vendor writing code in isolation.
-            </p>
-            <p className="text-base text-slate-300 leading-relaxed">
-              SGS acts as an embedded growth partner for founders, SME owners, and enterprise leaders. We align market research, brand positioning, high-intent advertising, custom web architecture, and CRM automation toward commercial outcomes.
-            </p>
-          </div>
-
-          <div className="lg:col-span-6 space-y-5">
-            <div className="p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 shadow-2xl relative overflow-hidden text-white">
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF]" />
-              <div className="flex items-center gap-3.5 mb-3">
-                <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#AFEB00]">
-                  <Target size={20} />
-                </div>
-                <h3 className="text-xl font-bold font-heading text-white">Our Mission</h3>
-              </div>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                To build resilient, high-velocity digital operating systems that empower ambitious businesses to attract high-value clients, streamline conversions, and scale sustainably.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 shadow-2xl relative overflow-hidden text-white">
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF]" />
-              <div className="flex items-center gap-3.5 mb-3">
-                <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#AFEB00]">
-                  <Compass size={20} />
-                </div>
-                <h3 className="text-xl font-bold font-heading text-white">Our Vision</h3>
-              </div>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                To be the most trusted business growth and digital transformation partner for enterprises across India and global markets, recognized for commercial craftsmanship and engineering rigor.
-              </p>
-            </div>
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={onOpenProjectModal}
+              className="px-9 py-4 rounded-xl bg-[#AFEB00] hover:bg-[#9CD100] text-[#0F1B64] text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl shadow-[#AFEB00]/25 transition-transform hover:-translate-y-0.5"
+            >
+              <span>Start a Conversation</span>
+              <ArrowRight size={15} />
+            </button>
           </div>
         </div>
+      </section>
 
-        {/* Core Operating Principles */}
-        <div className="mb-24">
-          <div className="max-w-3xl mb-12">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="h-[2px] w-4 bg-[#AFEB00]" />
-              <span className="text-xs uppercase font-bold text-[#AFEB00] font-heading tracking-wider">
-                OUR BELIEFS
-              </span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white tracking-tight">
-              The Principles That Guide Every Engagement
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div className="relative overflow-hidden p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-[#AFEB00]/40 hover:bg-[#0E1A5A]/95 transition-all duration-300 group hover:-translate-y-1 text-white">
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="text-xs font-bold font-heading text-[#AFEB00] uppercase mb-4 px-3 py-1 rounded-full bg-[#070D2B] border border-white/10 w-fit">
-                01 • Commercial First
-              </div>
-              <h3 className="text-xl font-bold font-heading text-white mb-2">Business-First Thinking</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                Technology and design must serve commercial goals. We never build software or launch campaigns without establishing clear financial and operational KPIs.
-              </p>
-            </div>
-
-            <div className="relative overflow-hidden p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-[#AFEB00]/40 hover:bg-[#0E1A5A]/95 transition-all duration-300 group hover:-translate-y-1 text-white">
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="text-xs font-bold font-heading text-[#AFEB00] uppercase mb-4 px-3 py-1 rounded-full bg-[#070D2B] border border-white/10 w-fit">
-                02 • Zero Vanity
-              </div>
-              <h3 className="text-xl font-bold font-heading text-white mb-2">No Artificial Metrics</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                We reject fabricated numbers and vanity impressions. We report on genuine pipeline value, qualified sales conversations, and tangible operational efficiencies.
-              </p>
-            </div>
-
-            <div className="relative overflow-hidden p-8 rounded-3xl bg-[#0B1446]/85 border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-[#AFEB00]/40 hover:bg-[#0E1A5A]/95 transition-all duration-300 group hover:-translate-y-1 text-white">
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="text-xs font-bold font-heading text-[#AFEB00] uppercase mb-4 px-3 py-1 rounded-full bg-[#070D2B] border border-white/10 w-fit">
-                03 • Unified Stack
-              </div>
-              <h3 className="text-xl font-bold font-heading text-white mb-2">One Operating Layer</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                Marketing, technology, and branding must communicate seamlessly. We eliminate the friction of managing fragmented vendors by executing the complete stack.
-              </p>
-            </div>
-
-          </div>
-        </div>
-
-        {/* 6-Step Approach */}
-        <ApproachTimeline />
-
-        {/* Bottom CTA */}
-        <div className="mt-20 relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#0B1446] to-[#070D2B] p-8 sm:p-12 border border-white/15 text-center max-w-4xl mx-auto space-y-6 shadow-2xl text-white">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#2033FF]/30 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#AFEB00]/15 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#AFEB00] border border-white/10 backdrop-blur-sm font-heading">
-              <Rocket size={13} />
-              <span>Partner for Growth</span>
-            </div>
-            <h3 className="text-2xl sm:text-4xl font-bold font-heading text-white leading-tight">
-              Let's build what's next for your business.
-            </h3>
-            <p className="text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
-              Whether you are launching a new venture, scaling qualified lead acquisition, or modernizing enterprise operations, SGS is ready to partner with you.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-              <button
-                onClick={onOpenProjectModal}
-                className="flex items-center gap-2 rounded-full bg-[#AFEB00] px-8 py-3.5 text-xs sm:text-sm font-bold text-[#141414] shadow-xl shadow-[#AFEB00]/25 transition-all duration-300 hover:bg-[#9CD600] hover:-translate-y-0.5 active:scale-95"
-              >
-                <span>Start a Conversation</span>
-                <ArrowRight size={16} />
-              </button>
-              <button
-                onClick={onOpenDiagnostic}
-                className="px-7 py-3.5 rounded-full border border-white/20 bg-white/5 text-xs font-semibold text-white hover:bg-white/15 transition-all backdrop-blur-md hover:-translate-y-0.5"
-              >
-                Evaluate Growth Readiness
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
   );
 };
+

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, RefreshCw, Layers, Zap, Target, Cpu, X, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, RefreshCw, Layers, X, Sparkles } from 'lucide-react';
 import { GrowthStage } from '../types';
 import { api } from '../services/api';
 
@@ -31,7 +31,7 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
         stage: 'attract' as GrowthStage,
         slug: 'digital-growth',
         title: 'ATTRACT Stage Focus: Demand & Authority Engine',
-        summary: 'Your core bottleneck is buyer awareness and high-intent inbound pipeline. You need targeted Search/Meta ad funnels and category authority positioning.',
+        summary: 'Your core commercial bottleneck is buyer awareness and high-intent inbound pipeline. You need targeted Search/Meta ad funnels and category authority positioning.',
         solution: 'GENERATE / Digital Growth Engine',
         priorityModules: [
           'High-Intent Google Search & Meta Acquisition',
@@ -43,8 +43,8 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
       return {
         stage: 'convert' as GrowthStage,
         slug: 'technology',
-        title: 'CONVERT Stage Focus: High-Velocity Digital Experience',
-        summary: 'You are losing high-intent prospects due to weak value proposition clarity, slow website load times, or clunky intake forms.',
+        title: 'CONVERT Stage Focus: High-Velocity Digital Architecture',
+        summary: 'You are losing high-intent prospects due to weak value proposition clarity, slow website load times, or clunky intake funnels.',
         solution: 'LAUNCH / Custom Tech Platform',
         priorityModules: [
           'Sub-second Modern Web Architecture',
@@ -97,30 +97,27 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#080E32]/85 backdrop-blur-xl animate-in fade-in duration-150">
-      <div className="relative w-full max-w-2xl bg-[#0B1446] border border-white/15 rounded-3xl p-6 sm:p-9 text-white shadow-2xl shadow-black/80 max-h-[92vh] overflow-y-auto">
-        
-        {/* Top Accent Line */}
-        <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#2033FF] via-[#AFEB00] to-[#2033FF] rounded-t-3xl" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-in fade-in duration-150">
+      <div className="relative w-full max-w-2xl bg-[#0F1B64] border border-white/15 rounded-2xl p-6 sm:p-9 text-white shadow-2xl max-h-[92vh] overflow-y-auto">
 
         {/* Header */}
         <div className="flex items-center justify-between pb-5 border-b border-white/10 mb-6 pt-1">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#2033FF]/20 border border-[#2033FF]/30 flex items-center justify-center text-[#AFEB00]">
-              <Layers size={20} className="text-[#AFEB00]" />
+            <div className="w-10 h-10 rounded-xl bg-[#0A1245] border border-white/10 flex items-center justify-center text-[#AFEB00]">
+              <Layers size={20} />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white font-heading">
-                SGS Growth System Diagnostic
+              <h3 className="text-xl font-heading font-bold text-white tracking-tight">
+                SGS Growth Diagnostic
               </h3>
-              <p className="text-xs text-slate-400 font-medium font-sans">
+              <p className="text-xs text-slate-300 font-sans mt-0.5">
                 Identify your primary business growth bottleneck in 60 seconds
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-white/5 text-slate-300 hover:text-white hover:bg-white/15 transition-colors border border-white/10"
+            className="p-2 rounded-xl bg-white/5 text-slate-300 hover:text-white hover:bg-white/15 transition-colors border border-white/10"
             aria-label="Close modal"
           >
             <X size={18} />
@@ -133,9 +130,9 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
             <div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="h-[2px] w-4 bg-[#AFEB00]" />
-                <span className="text-xs uppercase font-bold text-[#AFEB00] tracking-wider">Step 1 of 3</span>
+                <span className="text-xs uppercase font-mono font-bold text-[#AFEB00] tracking-wider">Step 1 of 3</span>
               </div>
-              <h4 className="text-xl font-bold text-white font-heading">What best describes your business?</h4>
+              <h4 className="text-2xl font-heading font-bold text-white tracking-tight">What best describes your business?</h4>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -150,14 +147,13 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
                 <button
                   key={b.id}
                   onClick={() => setBusinessType(b.id)}
-                  className={`p-3.5 rounded-2xl text-left border transition-all duration-200 ${
-                    businessType === b.id
-                      ? 'bg-[#2033FF]/20 border-[#AFEB00] text-white shadow-sm ring-1 ring-[#AFEB00]/30'
-                      : 'bg-[#070D2B] border-white/10 text-slate-300 hover:border-white/20 hover:bg-white/5'
-                  }`}
+                  className={`p-4 rounded-xl text-left border transition-all duration-200 ${businessType === b.id
+                      ? 'bg-[#0A1245] border-[#AFEB00] text-white shadow-sm ring-1 ring-[#AFEB00]/30'
+                      : 'bg-[#0A1245] border-white/10 text-slate-300 hover:border-white/20'
+                    }`}
                 >
-                  <div className="text-sm font-bold text-white">{b.title}</div>
-                  <div className="text-xs text-slate-400 mt-0.5 font-sans">{b.desc}</div>
+                  <div className="text-sm font-semibold font-heading text-white">{b.title}</div>
+                  <div className="text-xs text-slate-400 font-sans mt-0.5">{b.desc}</div>
                 </button>
               ))}
             </div>
@@ -165,10 +161,10 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
             <div className="flex justify-end pt-4 border-t border-white/10">
               <button
                 onClick={() => setStep(2)}
-                className="px-6 py-2.5 rounded-full bg-[#AFEB00] text-[#141414] text-xs font-bold hover:bg-[#9CD600] flex items-center gap-2 shadow-md shadow-[#AFEB00]/25 transition-all hover:-translate-y-0.5 active:scale-95"
+                className="px-7 py-3 rounded-xl bg-[#AFEB00] text-[#0F1B64] text-xs font-heading font-bold uppercase tracking-wider hover:bg-[#9CD100] flex items-center gap-2 shadow-lg shadow-[#AFEB00]/20 transition-all hover:-translate-y-0.5 active:scale-95"
               >
                 <span>Continue to Bottleneck Diagnosis</span>
-                <ArrowRight size={14} className="text-[#141414]" />
+                <ArrowRight size={14} className="text-[#0F1B64]" />
               </button>
             </div>
           </div>
@@ -180,9 +176,9 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
             <div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="h-[2px] w-4 bg-[#AFEB00]" />
-                <span className="text-xs uppercase font-bold text-[#AFEB00] tracking-wider">Step 2 of 3</span>
+                <span className="text-xs uppercase font-mono font-bold text-[#AFEB00] tracking-wider">Step 2 of 3</span>
               </div>
-              <h4 className="text-xl font-bold text-white font-heading">What is currently holding back your revenue?</h4>
+              <h4 className="text-2xl font-heading font-bold text-white tracking-tight">What is currently constraining your enterprise?</h4>
             </div>
 
             <div className="space-y-3">
@@ -191,33 +187,32 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
                   id: 'leads',
                   stage: 'ATTRACT',
                   title: 'Lack of Qualified Inbound Inquiries',
-                  desc: 'We rely too heavily on word-of-mouth or get low-budget inquiries instead of high-value buyers.'
+                  desc: 'We rely too heavily on word-of-mouth or get low-ticket inquiries instead of high-value buyers.'
                 },
                 {
                   id: 'website',
                   stage: 'CONVERT',
                   title: 'Website Doesn’t Represent Us or Convert',
-                  desc: 'Our current digital presence looks outdated, loads slowly, and fails to convince visitors to take action.'
+                  desc: 'Our digital presence looks dated, loads slowly, and fails to convince executive visitors to take action.'
                 },
                 {
                   id: 'operations',
                   stage: 'SCALE',
-                  title: 'Manual Bottlenecks & Spreadsheet Chaos',
-                  desc: 'Leads get lost, sales follow-ups are delayed by days, and operations are bogged down by repetitive work.'
+                  title: 'Manual Bottlenecks & Operational Friction',
+                  desc: 'Leads get lost, sales follow-ups are delayed by days, and operations are bogged down by spreadsheets.'
                 }
               ].map((bn) => (
                 <button
                   key={bn.id}
                   onClick={() => setPrimaryBottleneck(bn.id)}
-                  className={`w-full p-4 rounded-2xl text-left border transition-all duration-200 ${
-                    primaryBottleneck === bn.id
-                      ? 'bg-[#2033FF]/20 border-[#AFEB00] text-white shadow-sm ring-1 ring-[#AFEB00]/30'
-                      : 'bg-[#070D2B] border-white/10 text-slate-300 hover:border-white/20 hover:bg-white/5'
-                  }`}
+                  className={`w-full p-4 rounded-xl text-left border transition-all duration-200 ${primaryBottleneck === bn.id
+                      ? 'bg-[#0A1245] border-[#AFEB00] text-white shadow-sm ring-1 ring-[#AFEB00]/30'
+                      : 'bg-[#0A1245] border-white/10 text-slate-300 hover:border-white/20'
+                    }`}
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-bold text-white">{bn.title}</span>
-                    <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-[#AFEB00] text-[#141414]">
+                    <span className="text-sm font-semibold font-heading text-white">{bn.title}</span>
+                    <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-md bg-[#AFEB00] text-[#0F1B64]">
                       {bn.stage}
                     </span>
                   </div>
@@ -229,16 +224,16 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
             <div className="flex items-center justify-between pt-4 border-t border-white/10">
               <button
                 onClick={() => setStep(1)}
-                className="text-xs font-bold text-slate-400 hover:text-white"
+                className="text-xs font-heading font-bold uppercase tracking-wider text-slate-400 hover:text-white"
               >
                 ← Back
               </button>
               <button
                 onClick={handleGenerateDiagnostic}
-                className="px-6 py-2.5 rounded-full bg-[#AFEB00] text-[#141414] text-xs font-bold hover:bg-[#9CD600] flex items-center gap-2 shadow-md shadow-[#AFEB00]/25 transition-all hover:-translate-y-0.5 active:scale-95"
+                className="px-7 py-3 rounded-xl bg-[#AFEB00] text-[#0F1B64] text-xs font-heading font-bold uppercase tracking-wider hover:bg-[#9CD100] flex items-center gap-2 shadow-lg shadow-[#AFEB00]/20 transition-all hover:-translate-y-0.5 active:scale-95"
               >
                 <span>Generate Growth Architecture</span>
-                <ArrowRight size={14} className="text-[#141414]" />
+                <ArrowRight size={14} className="text-[#0F1B64]" />
               </button>
             </div>
           </div>
@@ -250,24 +245,24 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
             <div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="h-[2px] w-4 bg-[#AFEB00]" />
-                <span className="text-xs uppercase font-bold text-[#AFEB00] tracking-wider">Diagnosis Complete</span>
+                <span className="text-xs uppercase font-mono font-bold text-[#AFEB00] tracking-wider">Diagnosis Complete</span>
               </div>
-              <h4 className="text-xl font-bold text-white font-heading">{rec.title}</h4>
-              <p className="text-xs text-slate-300 mt-1 font-sans">{rec.summary}</p>
+              <h4 className="text-2xl font-heading font-bold text-white tracking-tight">{rec.title}</h4>
+              <p className="text-xs text-slate-300 font-sans mt-1">{rec.summary}</p>
             </div>
 
             {/* Recommended Solution Package */}
-            <div className="p-5 rounded-2xl bg-[#070D2B] border border-white/10 space-y-3">
+            <div className="p-5 rounded-xl bg-[#0A1245] border border-white/10 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs uppercase font-bold text-slate-300">Recommended Growth Solution:</span>
-                <span className="text-xs font-extrabold text-[#141414] px-3 py-1 rounded-full bg-[#AFEB00]">
+                <span className="text-xs uppercase font-heading font-bold text-slate-300">Recommended Growth Solution:</span>
+                <span className="text-xs font-heading font-bold text-[#0F1B64] px-3.5 py-1 rounded-md bg-[#AFEB00]">
                   {rec.solution}
                 </span>
               </div>
               <div className="space-y-2 pt-1">
-                <span className="text-xs font-bold text-slate-300 block">Priority Implementation Modules:</span>
+                <span className="text-xs font-heading font-semibold text-slate-300 block">Priority Implementation Modules:</span>
                 {rec.priorityModules.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2.5 text-xs text-slate-200 font-medium">
+                  <div key={idx} className="flex items-center gap-2.5 text-xs text-slate-200 font-sans font-medium">
                     <CheckCircle2 size={15} className="text-[#AFEB00] shrink-0" />
                     <span>{item}</span>
                   </div>
@@ -279,18 +274,18 @@ export const GrowthDiagnosticModal: React.FC<GrowthDiagnosticModalProps> = ({
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/10">
               <button
                 onClick={() => setStep(1)}
-                className="text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5"
+                className="text-xs font-heading font-bold uppercase tracking-wider text-slate-400 hover:text-white flex items-center gap-1.5"
               >
                 <RefreshCw size={13} />
                 <span>Retake Diagnostic</span>
               </button>
-              
+
               <button
                 onClick={handleCompleteAction}
-                className="w-full sm:w-auto px-7 py-3 rounded-full bg-[#AFEB00] text-[#141414] text-xs font-bold hover:bg-[#9CD600] flex items-center justify-center gap-2 shadow-lg shadow-[#AFEB00]/30 transition-all hover:-translate-y-0.5 active:scale-95"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#AFEB00] text-[#0F1B64] text-xs font-heading font-bold uppercase tracking-wider hover:bg-[#9CD100] flex items-center justify-center gap-2 shadow-lg shadow-[#AFEB00]/25 transition-all hover:-translate-y-0.5 active:scale-95"
               >
                 <span>Discuss This Architecture with SGS</span>
-                <ArrowRight size={15} className="text-[#141414]" />
+                <ArrowRight size={15} className="text-[#0F1B64]" />
               </button>
             </div>
           </div>

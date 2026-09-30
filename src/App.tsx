@@ -32,6 +32,17 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Track page views in Google Analytics on route change (SPA navigation)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'page_view', {
+        page_path: currentPath,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    }
+  }, [currentPath]);
+
   const navigate = (path: string) => {
     // If hash link on same page
     if (path.startsWith('#')) {

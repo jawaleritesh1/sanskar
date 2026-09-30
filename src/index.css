@@ -1,16 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-electric: #2033FF;
-  --color-electric-hover: #1827D9;
-  --color-lime: #AFEB00;
-  --color-lime-hover: #9CD600;
   --color-midnight: #0F1B64;
   --color-midnight-depth: #0A1245;
+  --color-midnight-dark: #080E32;
+  --color-midnight-surface: #121E6E;
+
+  --color-lime: #AFEB00;
+  --color-lime-hover: #9CD100;
+
+  --color-electric: #2033FF;
+  --color-electric-hover: #1827D9;
+
   --color-cloud: #F5FAFF;
   --color-cloud-surface: #EBF3FD;
+  --color-cloud-border: #DDE8F5;
+
   --color-ink: #141414;
   --color-ink-muted: #525252;
+  --color-ink-subtle: #737373;
 
   --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
@@ -20,18 +28,21 @@
 
 @layer base {
   :root {
+    /* SGS Official Primary Colors */
+    --midnight: #0F1B64;
+    --midnight-depth: #0A1245;
+    --midnight-dark: #080E32;
+    --lime: #AFEB00;
+    --lime-hover: #9CD100;
+
+    /* SGS Official Secondary Colors */
     --electric: #2033FF;
     --electric-hover: #1827D9;
-    --lime: #AFEB00;
-    --lime-hover: #9CD600;
-    --midnight: #0F1B64;
-    --midnight-depth: #080E32;
-    --midnight-surface: #0B1446;
-    --cloud: #080E32;
-    --cloud-surface: #0B1446;
-    --cloud-border: rgba(255, 255, 255, 0.1);
-    --ink: #FFFFFF;
-    --ink-muted: #94A3B8;
+    --cloud: #F5FAFF;
+    --cloud-surface: #EBF3FD;
+    --cloud-border: #DDE8F5;
+    --ink: #141414;
+    --ink-muted: #525252;
     --white: #FFFFFF;
 
     --f-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
@@ -40,14 +51,20 @@
   }
 
   body {
-    background-color: #080E32;
+    background-color: var(--midnight-dark);
     color: #FFFFFF;
     font-family: var(--f-body);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6, .font-heading {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-heading {
     font-family: var(--f-heading);
     font-weight: 700;
     line-height: 1.1;
@@ -61,8 +78,13 @@
 
 /* Infinite Marquee */
 @keyframes scrollMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .sgs-marquee {
@@ -80,6 +102,7 @@
 .geo-accent {
   position: relative;
 }
+
 .geo-accent::before {
   content: '';
   position: absolute;
@@ -92,7 +115,110 @@
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #080E32; }
-::-webkit-scrollbar-thumb { background: #1B2A78; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #2033FF; }
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080E32;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1B2A78;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2033FF;
+}
+
+/* SGS Brand Global Utility Classes */
+.bg-sgs-midnight {
+  background-color: #0F1B64;
+}
+
+.bg-sgs-midnight-depth {
+  background-color: #0A1245;
+}
+
+.bg-sgs-midnight-dark {
+  background-color: #080E32;
+}
+
+.bg-sgs-cloud {
+  background-color: #F5FAFF;
+}
+
+.bg-sgs-lime {
+  background-color: #AFEB00;
+}
+
+.text-sgs-lime {
+  color: #AFEB00;
+}
+
+.text-sgs-electric {
+  color: #2033FF;
+}
+
+.text-sgs-ink {
+  color: #141414;
+}
+
+.border-sgs-cloud {
+  border-color: #DDE8F5;
+}
+
+/* Standardized SGS Button Components */
+.btn-sgs-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.75rem;
+  font-family: var(--f-heading);
+  font-weight: 700;
+  font-size: 0.875rem;
+  background-color: #AFEB00;
+  color: #141414;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px 0 rgba(174, 240, 0, 0.25);
+  cursor: pointer;
+}
+
+.btn-sgs-primary:hover {
+  background-color: #9CD100;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(174, 240, 0, 0.35);
+}
+
+.btn-sgs-primary:active {
+  transform: translateY(0);
+}
+
+.btn-sgs-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.75rem;
+  font-family: var(--f-heading);
+  font-weight: 700;
+  font-size: 0.875rem;
+  background-color: #0F1B64;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-sgs-secondary:hover {
+  background-color: #0A1245;
+  transform: translateY(-2px);
+}
+
+.btn-sgs-secondary:active {
+  transform: translateY(0);
+}
