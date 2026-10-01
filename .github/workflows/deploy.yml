@@ -1,0 +1,44 @@
+name: Deploy Sanskar Landing Site to Hostinger VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build & Deploy via Docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Hostinger VPS via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script_stop: true
+          script: |
+            echo "── Starting Automated Deployment for Sanskar Landing Site ──"
+            DEPLOY_DIR="/var/www/sanskar-landing"
+
+            if [ ! -d "$DEPLOY_DIR" ]; then
+              echo "Directory does not exist. Cloning repository..."
+              git clone https://github.com/jawaleritesh1/sanskar.git "$DEPLOY_DIR"
+            fi
+
+            cd "$DEPLOY_DIR"
+            echo "Pulling latest changes from main branch..."
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "Building and launching Docker container..."
+            docker compose down || true
+            docker compose up -d --build
+
+            echo "Cleaning up dangling images to preserve VPS disk space..."
+            docker image prune -f
+
+            echo "✅ Deployment Successful! Sanskar Landing container is up on port 3001."

@@ -1,0 +1,11 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sanskar-landing
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3001:80"
+    environment:
+      - NODE_ENV=production
