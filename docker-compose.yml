@@ -1,11 +1,40 @@
 services:
-  web:
+  sgs-frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
-    container_name: sanskar-landing
+    container_name: sgs-frontend
     restart: unless-stopped
     ports:
       - "127.0.0.1:3001:80"
+    depends_on:
+      - sgs-backend
+    networks:
+      - sgs-network
+
+  sgs-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sgs-backend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5000:5000"
+    volumes:
+      - sgs-data:/app/data
     environment:
+      - PORT=5000
       - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/sgs_prod.db
+      - FRONTEND_URL=https://sanskargrowthsolutions.com
+      - NOTIFICATION_EMAIL=hello@sanskargrowthsolutions.com
+    networks:
+      - sgs-network
+
+volumes:
+  sgs-data:
+    name: sgs-db-data
+
+networks:
+  sgs-network:
+    name: sgs_network

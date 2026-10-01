@@ -1,4 +1,4 @@
-name: Deploy Sanskar Landing Site to Hostinger VPS
+name: Deploy SGS Fullstack to Hostinger VPS
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Build & Deploy via Docker
+    name: Build & Deploy SGS
     runs-on: ubuntu-latest
 
     steps:
@@ -21,24 +21,27 @@ jobs:
           port: 22
           script_stop: true
           script: |
-            echo "── Starting Automated Deployment for Sanskar Landing Site ──"
-            DEPLOY_DIR="/var/www/sanskar-landing"
+            echo "── Starting Automated Deployment for SGS Monorepo ──"
+            DEPLOY_DIR="/var/www/SGS"
 
             if [ ! -d "$DEPLOY_DIR" ]; then
-              echo "Directory does not exist. Cloning repository..."
+              echo "Directory $DEPLOY_DIR does not exist. Cloning repository..."
               git clone https://github.com/jawaleritesh1/sanskar.git "$DEPLOY_DIR"
             fi
 
             cd "$DEPLOY_DIR"
-            echo "Pulling latest changes from main branch..."
+            echo "Fetching latest changes from main branch..."
             git fetch origin main
             git reset --hard origin/main
 
-            echo "Building and launching Docker container..."
+            echo "Building and launching SGS containers (Frontend + Backend + DB)..."
             docker compose down || true
             docker compose up -d --build
 
-            echo "Cleaning up dangling images to preserve VPS disk space..."
+            echo "Cleaning up dangling images..."
             docker image prune -f
 
-            echo "✅ Deployment Successful! Sanskar Landing container is up on port 3001."
+            echo "Verifying SGS services status..."
+            docker compose ps
+
+            echo "✅ SGS Fullstack deployment successfully completed!"
